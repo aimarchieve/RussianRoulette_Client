@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { STATES } from 'mongoose';
+// import { STATES } from 'mongoose';
 // utils
 import api from '../../utils/api';
 
