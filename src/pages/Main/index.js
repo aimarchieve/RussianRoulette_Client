@@ -16,7 +16,6 @@ import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import PercentIcon from '@mui/icons-material/Percent';
 import Button from '@mui/material/Button';
 import { Icon } from '@iconify/react';
-import CloseIcon from '@mui/icons-material/Close';
 import GunAnimation from './GunAnimation';
 import './style.css';
 import { STATES } from 'mongoose';
@@ -79,7 +78,6 @@ export default function Main(props) {
     { bgColor: 'bg-purple', value: 44.86 },
     { bgColor: 'bg-white', value: 59.87 },
   ])
-
   const [wagered, setWagered] = useState(0);
   const [payout, setPayout] = useState(0);
 
@@ -122,6 +120,7 @@ export default function Main(props) {
 
   const startGame = () => {
     setSpeed(3500);
+    closehandleAutoplay();
     animationStart();
     if (currentUser) {
       dispatch(addNewGame(wagered, payout, currentUser.username, props.gameMode, props.gameType, currentUser._id));
@@ -150,8 +149,8 @@ export default function Main(props) {
       <Stack spacing={0.5} justifyContent="space-between" sx={{ height: '82vh' }}>
         {/* Topbar percentages */}
         <Grid container columns={7} alignItems="center">
-          <Grid item xs={7} md={1}>
-            <Stack direction="row" justifyContent="center" className="bg-dark" height={55} borderRadius={1}>
+          <Grid item md={1} sx={{ display: { xs:'none', md: 'flex' } }} >
+            <Stack direction="row" justifyContent="center" className="bg-dark" sx={{ height: {lg:55, md:40, sm:35, xs:20} }} borderRadius={1}>
               <Box
                 component="img"
                 src="/assets/images/logo.png"
@@ -162,30 +161,26 @@ export default function Main(props) {
           </Grid>
 
           <Grid item xs={7} md={5}>
-            <Box position="relative">
+            <Box position="relative" sx={{ height: { lg:55, md:45, sm:35, xs:30 } }}>
               <Box
-                height={55}
                 width={5}
                 className="bg-dark"
                 position="absolute"
-                sx={{ right: '50%', zIndex: 1000, opacity: 0.5 }}
+                sx={{ display: { xs: 'none', md: 'flex' }, right: '50%', zIndex: 1000, opacity: 0.5, height: {lg:55, md:40, sm:35, xs:20} }}
               />
-              <Grid container columns={5} >
+              <Grid container columns={5} height={55}>
                 <Marquee
                   duration={speed}
-                // duration={0}
-                // velocity={0}
+                  sx={{ height:{lg:55, md:40, sm:35, xs:20} }}
                 >
                   {
                     randomNumbers.map((percentageItem, index) => (
                       <Grid
                         item
                         key={index}
-                        // md={1}
-                        width="130px"
-                        height={55}
+                        sx={{ height: {lg:75, md:75, sm:75, xs:75}, width:{ lg: '130px', md: '110px', sm: '90px', xs: '80px'} }}
                       >
-                        <Stack borderRadius={1} className={betPercentagesData[(index + 1) % 4].bgColor} height={55} justifyContent="center" ml={0.5}>
+                        <Stack borderRadius={1} className={betPercentagesData[(index + 1) % 4].bgColor} sx={{ height: {lg:50, md:40, sm:35, xs:20} }} justifyContent="center" ml={0.5}>
                           <Typography
                             sx={{
                               display: 'flex',
@@ -194,10 +189,9 @@ export default function Main(props) {
                               my: 'auto',
                               justifyContent: 'center',
                               fontFamily: 'Montserrat',
+                              fontSize: { lg:20, md:18, sm: 16, xs:14 }
                             }}
-                            fontSize={20}
                             fontWeight={700}
-                            height={55}
                           >
                             x{percentageItem}
                           </Typography>
@@ -210,8 +204,8 @@ export default function Main(props) {
             </Box>
           </Grid>
 
-          <Grid item xs={7} md={1}>
-            <Stack direction="row" justifyContent="center" className="bg-dark" height={55} borderRadius={1} ml={0.5}>
+          <Grid item md={1} sx={{ display: { xs: 'none', md: 'flex' } }} >
+            <Stack direction="row" justifyContent="center" className="bg-dark" sx={{height: {lg:55, md:40, sm:35, xs:20}}} borderRadius={1} ml={0.5}>
               <Box
                 component="img"
                 src="/assets/images/logo.png"
@@ -222,8 +216,7 @@ export default function Main(props) {
           </Grid>
         </Grid>
 
-        <Stack justifyContent="center" alignItems="center" className="bg-dark" borderRadius={1} sx={{ flexGrow: 1 }}>
-          {/* <Box component="img" src="/assets/images/frame.png" width="50%" /> */}
+        <Stack justifyContent="center" alignItems="center" className="bg-dark" borderRadius={1} sx={{ flexGrow: 1, padding: {xs:2, md:0} }}>
           <GunAnimation isStart={isStart} setIsStart={setIsStart} />
         </Stack>
 
@@ -231,26 +224,26 @@ export default function Main(props) {
           <Box className="bg-dark" px={0.25} py={0.5} borderRadius={1}>
             <Grid container columns={10}>
               {
-                bottomBetPercentages.map(percentageItem => (
-                  <Grid item key={percentageItem.value} md={1}>
+                bottomBetPercentages.map((percentageItem, index) => (
+                  <Grid item key={percentageItem.value} md={1} xs={1} lg={1} >
                     <Stack
                       borderRadius={1}
-                      className={percentageItem.bgColor}
-                      height={55}
+                      className={bottomBetPercentages[index].bgColor}
+                      sx={{ height: {lg:35, xs:20}, cursor: 'pointer' }}
                       justifyContent="center"
+                      textAlign="center"
                       mx={0.25}
+                      onClick={openGameInfoModal}
                     >
-                      <Button onClick={openGameInfoModal}>
+                      {/* <Button > */}
                         <Typography
-                          sx={{ display: 'flex', alignItems: 'center', height: 'auto', my: 'auto', justifyContent: 'center' }}
-                          fontSize={20}
-                          fontWeight={700}
+                          sx={{ display: 'flex', alignItems: 'center', height: 'auto', my: 'auto', justifyContent: 'center', fontSize:{lg:20, md:16, sm:12, xs:8}, fontWeight: { lg:700, md:650, sm:600, xs:550 } }}
                           fontFamily="Montserrat"
                           color="#000000"
                         >
-                          <CloseIcon sx={{ fontSize: 16 }} />{percentageItem.value}
+                          <span style={{ textTransform: "lowercase" }} >x</span>{percentageItem.value}
                         </Typography>
-                      </Button>
+                      {/* </Button> */}
                     </Stack>
                   </Grid>
                 ))
@@ -263,9 +256,10 @@ export default function Main(props) {
               <Grid item xs={3} md={1}>
                 <LeftSlider wagered={wagered} setWagered={setWagered} />
               </Grid>
-
+              <Grid item xs={3} md={1} sm={1} sx={{ display: { md: 'none', xs: 'flex', sm: 'flex' } }} >
+                <RightSlider payout={payout} setPayout={setPayout} />
+              </Grid>
               <Grid item xs={3} md={1}>
-
                 <Stack
                   position="relative"
                   className="bg-dark"
@@ -1036,16 +1030,27 @@ export default function Main(props) {
                     </MainButton>
                   </ButtonGroup>
 
-                  <Box fullWidth>
-                    <Grid container columns={2} spacing={0.5}>
-                      <Grid item md={1}>
-                        <BlackButton sx={{ color: 'white', fontWeight: 800, fontSize: 9, fontFamily: "Montserrat" }} fullWidth>
+                  <Box
+                  fullWidth
+                  p={0.5}
+                  pb={0.7}
+                  >
+                    <Grid container columns={2} spacing={0.3}>
+                      <Grid item md={1} xs={1}>
+                        <BlackButton sx={{ color: 'white', fontWeight: 750, fontSize: 9, fontFamily: "Montserrat" }} fullWidth>
+                          <Typography
+                           component="span"
+                           fontSize="inherit"
+                           fontWeight="inherit"
+                           sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                          >
                           Activate bet-list
+                            </Typography>
                         </BlackButton>
                       </Grid>
 
-                      <Grid item md={1}>
-                        <BlackButton onClick={openBetListModal} sx={{ color: 'white', fontWeight: 800, fontSize: 9, fontFamily: "Montserrat" }} fullWidth>
+                      <Grid item md={1} xs={1} spacing={0.3}>
+                        <BlackButton onClick={openBetListModal} sx={{ color: 'white', fontWeight: 750, fontSize: 9, fontFamily: "Montserrat" }} fullWidth>
                           <Typography
                             component="span"
                             fontSize="inherit"
@@ -1060,7 +1065,7 @@ export default function Main(props) {
                   </Box>
                 </Stack>
               </Grid>
-              <Grid item xs={3} md={1}>
+              <Grid item xs={3} md={1} sm={1} sx={{ display: { md: 'flex', xs: 'none', sm: 'none' } }} >
                 <RightSlider payout={payout} setPayout={setPayout} />
               </Grid>
             </Grid>

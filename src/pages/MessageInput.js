@@ -56,6 +56,7 @@ export default function MessageInput({ socket }) {
         <Stack>
             <form onSubmit={submitForm}>
                 <TextField
+                    fontFamily="Montserrat"
                     autoFocus
                     value={value}
                     label="Send a message"

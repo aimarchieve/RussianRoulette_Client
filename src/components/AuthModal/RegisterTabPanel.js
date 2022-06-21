@@ -5,7 +5,6 @@ import {
   TextField as MuiTextField,
   styled,
   Typography,
-  Link,
   Grid,
   Box
 } from '@mui/material';
@@ -13,6 +12,10 @@ import { Icon } from '@iconify/react';
 import * as yup from 'yup';
 import { useFormik } from "formik";
 import useAuth from '../../hooks/useAuth';
+import api from '../../utils/api';
+import { useDispatch, useSelector } from '../../redux/store';
+import { getAddress } from '../../redux/slices/getAddress';
+import { formatTimeDelta } from 'react-countdown';
 
 /* ---------------------------------------------------------------------------------------- */
 
@@ -86,12 +89,23 @@ const validSchema = yup.object().shape({
 /* ---------------------------------------------------------------------------------------- */
 
 export default function RegisterTabPanel() {
-  const { signup } = useAuth();
-// 
+  const { signin, signup } = useAuth();
+  const dispatch = useDispatch();
+
   const handleSubmit = (values) => {
     const { username, email, password, role, level, balance } = values;
     signup({ username, email, password, role, level, balance });
   };
+  const walletId = "62b0bc02d2c7f800070289b6";
+  const blockchain = "bitcoin";
+  const network = "testnet";
+
+  const Register = async (values) => {
+    const { username, email, password, role, level, balance } = values;
+    await signup({ username, email, password, role, level, balance });
+    // await signin({ username, password });
+    dispatch(getAddress(walletId, blockchain, network));
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -105,7 +119,7 @@ export default function RegisterTabPanel() {
     },
     validationSchema: validSchema,
     onSubmit: (values) => {
-      return handleSubmit(values);
+      return Register(values);
     }
   });
 

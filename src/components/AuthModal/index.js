@@ -93,27 +93,10 @@ const DialogTitle = (props) => {
     </MuiDialogTitle>
   );
 };
-
-// const Tab = styled(MuiTab)(({ theme }) => ({
-//   fontFamily: 'Montserrat',
-//   textTransform: 'capitalize',
-//   fontWeight: 700,
-//   '&.Mui-selected': {
-//     color: '#f8bf60'
-//   }
-// }));
-
-// const TabList = styled(MuiTabList)(({ theme }) => ({
-//   '& .css-3sx0hq-MuiTabs-indicator': {
-//     backgroundColor: '#f8bf60'
-//   }
-// }));
-
 /* ---------------------------------------------------------------------------------------- */
 
 export default function AuthModal() {
-  const { modalIsOpened, currentTab, closeAuthModal, handleCurrentTab } = useAuth();
-
+  const { modalIsOpened, closeAuthModal } = useAuth();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [ login, setLogin ] = useState(true);
@@ -163,22 +146,6 @@ export default function AuthModal() {
                 ''
           }
         </Box>
-        {/* <Box width="75%" mx="auto">
-          <TabContext value={currentTab}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-              <TabList onChange={(e, newValue) => handleCurrentTab(newValue)} aria-label="lab API tabs example" centered>
-                <Tab label="Log in" value="login" />
-                <Tab label="Register" value="register" />
-              </TabList>
-            </Box>
-            <TabPanel value="login" sx={{ px: 0 }}>
-              <LoginTabPanel />
-            </TabPanel>
-            <TabPanel value="register" sx={{ px: 0 }}>
-              <RegisterTabPanel />
-            </TabPanel>
-          </TabContext>
-        </Box> */}
       </DialogContent>
     </Dialog>
   );

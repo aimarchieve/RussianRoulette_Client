@@ -26,9 +26,12 @@ import AccountModal from './AccountModal';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { useDispatch, useSelector } from '../redux/store';
+import Button from '@mui/material/Button';
+
 /* ---------------------------------------------------------------------------------------------------- */
 
-const pages = ['Products', 'Pricing', 'Blog'];
+// const pages_logout = ['Login', 'Register'];
+// const pages_login = ['Wallet', 'Log out'];
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   backgroundColor: '#1c2127',
@@ -65,10 +68,10 @@ const RegisterButton = styled(MuiButton)(({ theme }) => ({
 
 const WalletButton = styled(MuiButton)(({ theme }) => ({
   backgroundColor: '#f8bf60',
-  boxShadow: '0 6px 0 #997a49',
+  boxShadow: {md:'0 6px 0 #997a49', xs: 'none'},
   color: '#000000',
   padding: 0,
-  minWidth: 84,
+  minWidth: { lg: 84, md: 75, sm: 60, xs: 45 },
   borderRadius: '0px 8px 8px 0px',
   '&:hover': {
     backgroundColor: '#ab884d',
@@ -85,7 +88,7 @@ const TextField = styled(MuiTextField)(({ theme }) => ({
   '& .MuiOutlinedInput-input': {
     padding: '8px 8px',
     fontFamily: 'Montserrat',
-    fontSize: 20,
+    fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
     fontWeight: 700,
     textAlign: 'right'
   },
@@ -104,9 +107,7 @@ export default function TopBar(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const dispatch = useDispatch();
   const { balance } = useSelector((state) => state.game);
-  console.log("balance", balance);
-  const [ userBalance, setUserBalance ] = useState(currentUser?.balance);
-  console.log("userBalance", userBalance);
+  const [userBalance, setUserBalance] = useState(currentUser?.balance);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -115,15 +116,32 @@ export default function TopBar(props) {
     setAnchorElNav(null);
   };
 
+  const handleSignIn = () => {
+    handleCloseNavMenu();
+    openAuthModal(LOGIN);
+  }
+
+  const handleRegister = () => {
+    handleCloseNavMenu();
+    openAuthModal(REGISTER);
+  }
+
   const handleAccountModal = () => {
     openAccountModal();
     handleClose();
+    handleCloseNavMenu();
   };
 
   const handleAffiliateModal = () => {
     openAffiliateModal();
     handleClose();
+    handleCloseNavMenu();
   };
+
+  const handleLogout = () => {
+    handleCloseNavMenu();
+    signout();
+  }
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -135,14 +153,13 @@ export default function TopBar(props) {
   };
 
   useEffect(() => {
-    console.log('# useEffect balance => ', balance);
-    if(balance){
+    if (balance) {
       setUserBalance(balance);
     }
   }, [balance]);
 
   useEffect(() => {
-    if(currentUser){
+    if (currentUser) {
       setUserBalance(currentUser.balance);
     }
   }, [currentUser?.balance]);
@@ -172,58 +189,100 @@ export default function TopBar(props) {
               >
                 <MenuIcon />
               </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: 'block', md: 'none' },
-                }}
-              >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-            >
-              <Box component="img" alt="logo" src="/assets/images/logo.png" />
-            </Typography>
+              {currentUser ?
+                <>
+                  <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorElNav}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'left',
+                    }}
+                    open={Boolean(anchorElNav)}
+                    onClose={handleCloseNavMenu}
+                    sx={{
+                      display: { xs: 'block', md: 'none' },
+                    }}
+                  >
+                    <MenuItem onClick={handleLogout}>
+                      <Typography textAlign="center">
+                        Log out
+                      </Typography>
+                    </MenuItem>
+                  </Menu>
+                </>
+                :
+                <>
+                  <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorElNav}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'left',
+                    }}
+                    open={Boolean(anchorElNav)}
+                    onClose={handleCloseNavMenu}
+                    sx={{
+                      display: { xs: 'block', md: 'none' },
+                    }}
+                  >
+                    <MenuItem onClick={handleSignIn}>
+                      <Typography>
+                        Sign in
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem onClick={handleRegister}>
+                      <Typography>
+                        Register
+                      </Typography>
+                    </MenuItem>
+                  </Menu>
+                </>
+              }
 
+            </Box>
             {
               currentUser && (
                 <Stack sx={{ flexDirection: 'row', display: 'flex', justifyContent: 'center', flexGrow: 1 }}>
                   <Box>
-                    <Stack direction="row">
+                    <Stack direction="row" sx={{ mt: { xs: 1 } }} >
                       {/* Please input the select here */}
                       <TextField
-                        value={ currentUser ? userBalance : 0}
+                        value={currentUser ? userBalance : 0}
+                        sx={{ width: { xs: 130, sm: 150, md: 180, lg: 200 } }}
                         InputProps={{
                           endAdornment: <InputAdornment position="end">
-                            <Stack direction="row" alignItems="center" spacingnpm={1}>
-                              <MuiIcon className="text-yellow" sx={{ fontSize: 25 }}><Icon icon="ic:baseline-diamond" /></MuiIcon>
-                              <MuiIcon sx={{ fontSize: 25 }}><Icon icon="iwwa:arrow-down" /></MuiIcon>
+                            <Stack direction="row" alignItems="center" display="flex" spacingnpm={1}>
+                              <MuiIcon className="text-yellow" sx={{ display: 'flex', fontSize: { xs: 18, sm: 18, md: 20, lg: 25 } }}><Icon icon="ic:baseline-diamond" /></MuiIcon>
+                              <MuiIcon sx={{ fontSize: { display: 'flex', xs: 12, sm: 12, md: 14, lg: 16 } }}><Icon icon="iwwa:arrow-down" /></MuiIcon>
                             </Stack>
                           </InputAdornment>
                         }}
                       />
-                      <WalletButton onClick={openWalletModal}> Wallet</WalletButton>
+                      <WalletButton onClick={openWalletModal}>
+                        <Typography
+                          sx={{ display: { xs: 'flex', md: 'none' } }}
+                        >
+                          <Icon icon="fa-solid:wallet" width="14" color="#000" />
+                        </Typography>
+                        <Typography
+                          sx={{ fontSize: { xs: 12, sm: 12, md: 14, lg: 16 }, display: { xs:'none', md: 'flex' } }}
+                          fontFamily="Montserrat"
+                          fontWeight={700}
+                        >
+                          Wallet
+                        </Typography>
+                      </WalletButton>
                     </Stack>
                   </Box>
                 </Stack>
@@ -232,11 +291,11 @@ export default function TopBar(props) {
 
             {
               currentUser ? (
-                <Stack direction="row" justifyContent="center" alignItems="center" spacing={0.5}>
+                <Stack direction="row" justifyContent="center" alignItems="center" spacing={0.5} sx={{ display: { xs: 'none', md: 'flex' } }}>
                   <LoginButton onClick={signout}>Logout</LoginButton>
                 </Stack>
               ) : (
-                <Stack direction="row" justifyContent="center" alignItems="center" spacing={0.5}>
+                <Stack direction="row" justifyContent="center" alignItems="center" spacing={0.5} sx={{ display: { xs: 'none', md: 'flex' } }}>
                   <LoginButton onClick={() => openAuthModal(LOGIN)}>Login</LoginButton>
                   <RegisterButton onClick={() => openAuthModal(REGISTER)}>Register</RegisterButton>
                 </Stack>
@@ -244,31 +303,30 @@ export default function TopBar(props) {
             }
           </Stack>
           <Stack sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
-            <Box ml={2} mr={3} sx={{ flexGrow: 0 }}>
-              <IconButton onClick={handleClick} sx={{ p: 0, fontSize: 30 }}>
+            <Box ml={2} sx={{ flexGrow: 0, mr: { xs: 1, sm: 1, md: 3, lg: 3 } }}>
+              <IconButton onClick={handleClick} sx={{ p: 0, fontSize: { xs: 20, sm: 20, md: 25, lg: 30 } }}>
                 <Icon icon="mdi:account" />
               </IconButton>
               <Menu
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                    MenuListProps={{
-                      'aria-labelledby': 'basic-button',
-                    }}
-                  >
-                    <MenuItem onClick={handleAccountModal}>Account</MenuItem>
-                    <MenuItem onClick={handleAffiliateModal}>Affiliate</MenuItem>
-                  </Menu>
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  'aria-labelledby': 'basic-button',
+                }}
+              >
+                <MenuItem onClick={handleAccountModal}>Account</MenuItem>
+                <MenuItem onClick={handleAffiliateModal}>Affiliate</MenuItem>
+              </Menu>
             </Box>
             {
               props.chat ?
                 ''
                 :
-                <Box sx={{ flexGrow: 0 }}>
+                <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
                   <IconButton sx={{ p: 0, fontSize: 25, color: 'gray' }}>
                     <Icon onClick={() => props.setChat(true)} icon="dashicons:arrow-right-alt2" />
                   </IconButton>
-                  
                 </Box>
             }
           </Stack>

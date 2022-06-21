@@ -40,10 +40,9 @@ export function addStaking(username, value, received, type, _id, balance) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      console.log(username, value, received, type, _id, balance);
       balance = balance - Number(value);
       const response = await api.put(`/userInfo/updateUserInfoById/${_id}`, { balance });
-      await api.post('/transactionInfo/insertTransactionInfo', { username, value, received, type });
+      const res = await api.post('/transactionInfo/insertTransactionInfo', { username, value, received, type });
     } catch (error) {
       dispatch(slice.actions.hasError(error));
       console.log(error);

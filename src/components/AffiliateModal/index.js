@@ -96,7 +96,6 @@ const DialogTitle = (props) => {
 /* ---------------------------------------------------------------------------------------- */
 
 export default function AffiliateModal() {
-  console.log("Affiliate")
   const { modalIsOpened, closeAffiliateModal } = useAffiliate();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));

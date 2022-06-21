@@ -85,7 +85,6 @@ const validSchema = yup.object().shape({
 
 export default function LoginTabPanel() {
   const { signin } = useAuth();
-
   const handleSubmit = (values) => {
     signin(values);
   };
@@ -141,9 +140,6 @@ export default function LoginTabPanel() {
       <Typography fontFamily="Montserrat" textAlign="center" fontSize={14} fontWeight={700}>OR</Typography>
 
       <Stack direction="row" spacing={0.5} justifyContent="space-between">
-        {/* <SocialButton sx={{ fontSize: 42, width: '33%' }}>
-          <Icon icon="foundation:social-steam" />
-        </SocialButton> */}
         <SocialButton sx={{ fontSize: 24, width: '50%' }}>
           <Icon icon="brandico:facebook" />
         </SocialButton>
@@ -167,19 +163,6 @@ export default function LoginTabPanel() {
           Create an Account?
         </Typography>
       </Stack>
-
-      {/* <Typography fontFamily="Montserrat" textAlign="center" fontSize={14} fontWeight={700}>
-        Forgot your password?&nbsp;
-        <Link sx={{ color: '#f8bf60', cursor: 'pointer' }}>
-          Reset Password
-        </Link>
-      </Typography>
-      <Typography fontFamily="Montserrat" textAlign="center" fontSize={14} fontWeight={700}>
-        Don't have an account?&nbsp;
-        <Link sx={{ color: '#f8bf60', cursor: 'pointer' }}>
-          Register here
-        </Link>
-      </Typography> */}
     </Stack>
   );
 }

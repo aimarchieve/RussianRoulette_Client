@@ -13,7 +13,6 @@ const store = configureStore({
     })
 });
 
-
 const useSelector = useReduxSelector;
 
 const useDispatch = () => useReduxDispatch();

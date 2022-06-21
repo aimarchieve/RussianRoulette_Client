@@ -6,72 +6,89 @@ import {
     styled,
     Button as MuiButton,
     Divider,
-    Slider as MuiSlider
+    Slider as MuiSlider,
+    InputAdornment,
+    Icon as MuiIcon,
+    TextField as MuiTextField
 } from '@mui/material';
-import { Icon } from '@iconify/react';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
 import { grey } from '@mui/material/colors';
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
-import TabsUnstyled from '@mui/base/TabsUnstyled';
 import Button from '@mui/material/Button';
 import TabsListUnstyled from '@mui/base/TabsListUnstyled';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
-import DiamondIcon from '@mui/icons-material/Diamond';
 import Switch from '@mui/material/Switch';
+import { useDispatch, useSelector } from '../../redux/store';
+import useAuth from '../../hooks/useAuth';
+import { addTip } from '../../redux/slices/tip';
+import useWallet from '../../hooks/useWallet';
+
 
 /* ---------------------------------------------------------------------------------------------------- */
 const IOSSwitch = styled((props) => (
     <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-  ))(({ theme }) => ({
+))(({ theme }) => ({
     width: 42,
     height: 26,
     padding: 0,
     '& .MuiSwitch-switchBase': {
-      padding: 0,
-      margin: 2,
-      transitionDuration: '300ms',
-      '&.Mui-checked': {
-        transform: 'translateX(16px)',
-        color: '#1c2127',
-        '& + .MuiSwitch-track': {
-          backgroundColor: theme.palette.mode === 'dark' ? '#f8bf60' : '#65C466',
-          opacity: 1,
-          border: 0,
+        padding: 0,
+        margin: 2,
+        transitionDuration: '300ms',
+        '&.Mui-checked': {
+            transform: 'translateX(16px)',
+            color: '#1c2127',
+            '& + .MuiSwitch-track': {
+                backgroundColor: theme.palette.mode === 'dark' ? '#f8bf60' : '#65C466',
+                opacity: 1,
+                border: 0,
+            },
+            '&.Mui-disabled + .MuiSwitch-track': {
+                opacity: 0.5,
+            },
+        },
+        '&.Mui-focusVisible .MuiSwitch-thumb': {
+            color: '#33cf4d',
+            border: '6px solid #fff',
+        },
+        '&.Mui-disabled .MuiSwitch-thumb': {
+            color:
+                theme.palette.mode === 'light'
+                    ? theme.palette.grey[100]
+                    : theme.palette.grey[600],
         },
         '&.Mui-disabled + .MuiSwitch-track': {
-          opacity: 0.5,
+            opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
         },
-      },
-      '&.Mui-focusVisible .MuiSwitch-thumb': {
-        color: '#33cf4d',
-        border: '6px solid #fff',
-      },
-      '&.Mui-disabled .MuiSwitch-thumb': {
-        color:
-          theme.palette.mode === 'light'
-            ? theme.palette.grey[100]
-            : theme.palette.grey[600],
-      },
-      '&.Mui-disabled + .MuiSwitch-track': {
-        opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
-      },
     },
     '& .MuiSwitch-thumb': {
-      boxSizing: 'border-box',
-      width: 22,
-      height: 22,
+        boxSizing: 'border-box',
+        width: 22,
+        height: 22,
     },
     '& .MuiSwitch-track': {
-      borderRadius: 26 / 2,
-      backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
-      opacity: 1,
-      transition: theme.transitions.create(['background-color'], {
-        duration: 500,
-      }),
+        borderRadius: 26 / 2,
+        backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
+        opacity: 1,
+        transition: theme.transitions.create(['background-color'], {
+            duration: 500,
+        }),
     },
-  }));
-  
+}));
+
+const TextField = styled(MuiTextField)(({ theme }) => ({
+    fontFamily: 'Montserrat',
+    borderRadius: '5px',
+    '& .MuiOutlinedInput-input': {
+        padding: '1px 1px',
+        fontSize: 18,
+    },
+    '& .MuiOutlinedInput-notchedOutline': {
+        display: 'none'
+    }
+}));
+
 
 const Slider = styled(MuiSlider)(({ theme }) => ({
     width: '94%',
@@ -160,12 +177,21 @@ const TabsList = styled(TabsListUnstyled)`
 /* ---------------------------------------------------------------------------------------------------- */
 
 export default function Tip() {
-
+    const dispatch = useDispatch();
+    const { currentUser } = useAuth();
     const [selectPrivate, setSelectPrivate] = useState(true);
-
+    const [ amount, setAmount ] = useState(0);
+    const { modalIsOpened, closeWalletModal } = useWallet();
+    const [ receiveUsername, setReceiveUsername ] = useState('');
     const selectedPrivatePublic = (event) => {
         setSelectPrivate(event.target.checked);
-        console.log("selectPrivate:", event.target.checked);
+    }
+    const type = "tip";
+    const handleSendTip = () => {
+        closeWalletModal();
+        if(currentUser){
+            dispatch(addTip(currentUser.username, type, Number(amount), receiveUsername, currentUser._id, currentUser.balance));
+        }
     }
 
     return (
@@ -210,15 +236,18 @@ export default function Tip() {
                     >
                         Username
                     </Typography>
-                    <Typography
-                        fontSize={13}
-                        fontWeight={900}
-                    >
-                        loremipsum83
-                    </Typography>
-                    <Typography>
-
-                    </Typography>
+                    <TextField
+                        sx={{ backgroundColor: '#191e24' }}
+                        value={receiveUsername}
+                        onChange={(e) => setReceiveUsername(e.target.value)}
+                        InputProps={{
+                            endAdornment: <InputAdornment position="end">
+                                <Stack direction="row" alignItems="center" spacingnpm={1}>
+                                    <MuiIcon className="text-yellow" sx={{ fontSize: { lg: 20, md: 18, sm: 16, xs: 14 } }}></MuiIcon>
+                                </Stack>
+                            </InputAdornment>
+                        }}
+                    />
                 </Box>
                 <Box
                     mt={1}
@@ -235,13 +264,19 @@ export default function Tip() {
                     >
                         Amount
                     </Typography>
-                    <Typography
-                        fontSize={13}
-                        fontWeight={900}
-                    >
-                        20,000.00
-                    </Typography>
-                    <DiamondIcon sx={{ fontSize: 16 }} className='text-yellow' />
+                    <TextField
+                        type="number"
+                        sx={{ backgroundColor: '#191e24' }}
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                        InputProps={{
+                            endAdornment: <InputAdornment position="end">
+                                <Stack direction="row" alignItems="center" spacingnpm={1}>
+                                    <MuiIcon className="text-yellow" sx={{ fontSize: { lg: 20, md: 18, sm: 16, xs: 14 } }}></MuiIcon>
+                                </Stack>
+                            </InputAdornment>
+                        }}
+                    />
                 </Box>
                 <Box>
                     <Stack direction="row" justifyContent="center" mb={2}>
@@ -261,7 +296,7 @@ export default function Tip() {
                     <Typography
                         fontSize={13}
                         fontWeight={700}
-                        color={ selectPrivate ? 'gray' : '#ffffff' }
+                        color={selectPrivate ? 'gray' : '#ffffff'}
                     >
                         Private
                     </Typography>
@@ -269,7 +304,7 @@ export default function Tip() {
                     <Typography
                         fontSize={13}
                         fontWeight={700}
-                        color={ selectPrivate ? '#ffffff' : 'gray' }
+                        color={selectPrivate ? '#ffffff' : 'gray'}
                     >
                         Public
                     </Typography>
@@ -282,7 +317,9 @@ export default function Tip() {
                     p={1}
                     mt={2}
                 >
-                    <Button>
+                    <Button
+                        onClick={handleSendTip}
+                    >
                         <Typography
                             fontSize={13}
                             fontWeight={800}

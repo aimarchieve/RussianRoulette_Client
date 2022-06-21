@@ -18,7 +18,7 @@ const Tab = styled(TabUnstyled)`
   font-weight: bold;
   background-color: transparent;
   width: 100%;
-  padding: 15px;
+  padding: 10px;
   border: none;
   border-radius: 3px;
   display: flex;
@@ -52,7 +52,7 @@ const TabsList = styled(TabsListUnstyled)`
 
 export default function PlayerSidebar(props) {
   return (
-    <Stack spacing={0.5}>
+    <Stack spacing={0.5} sx={{ display:{xs:'none', md:'flex'}, height: '82vh' }} >
       {/* Title */}
       <Box className="bg-dark" borderRadius={1} p={2}>
         <Typography textTransform="uppercase" align="center" color="white" fontWeight={800}>
@@ -396,7 +396,7 @@ export default function PlayerSidebar(props) {
           </Box>      
         </Stack>
       </Stack>
-      <Box p={1} borderRadius={1} className="bg-dark">
+      <Box borderRadius={1} className="bg-dark">
         <Typography
           align="right"
           color="white"
@@ -407,11 +407,16 @@ export default function PlayerSidebar(props) {
         >
           type
         </Typography>
-        <Box sx={{ marginBottom: '10px' }}>
+        <Box
+          width="85%"
+          margin="auto"
+          mb={3.5}
+          mt={1}
+        >
           <TabsUnstyled defaultValue={0}>
             <TabsList>
               <Tab sx={{ fontFamily: 'Montserrat', textTransform: 'uppercase' }} onClick={() => props.setGameType("normal")} >normal</Tab>
-              <Tab sx={{ fontFamily: 'Montserrat', textTransform: 'uppercase' }} onClick={() => props.setGameType("bonus")} >bonus-only</Tab>
+              <Tab sx={{ fontFamily: 'Montserrat', textTransform: 'uppercase', padding: '5px' }} onClick={() => props.setGameType("bonus")} >bonus-only</Tab>
             </TabsList>
           </TabsUnstyled>
         </Box>

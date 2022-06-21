@@ -81,6 +81,7 @@ export default function MessageBox({ socket }) {
                                     .map((message) => (
                                         <TableRow
                                             key={message.id}
+                                            fontFamily='Montserrat'
                                             title={`Sent at ${new Date(message.time).toLocaleTimeString()}`}
                                         >
                                             <TableCell

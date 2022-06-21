@@ -1,10 +1,22 @@
 import React from 'react';
-import { Stack, Box as MuiBox, Grid, Typography, Slider as MuiSlider, styled, Tooltip, TextField as MuiTextField } from '@mui/material';
+import {
+  Stack,
+  Box as MuiBox,
+  Grid,
+  Typography,
+  Slider as MuiSlider,
+  styled,
+  Tooltip,
+  InputAdornment,
+  Icon as MuiIcon,
+  TextField as MuiTextField
+} from '@mui/material';
 import { grey } from '@mui/material/colors';
 import TabsUnstyled from '@mui/base/TabsUnstyled';
 import TabsListUnstyled from '@mui/base/TabsListUnstyled';
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
+import { Icon } from '@iconify/react';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const Tab = styled(TabUnstyled)`
@@ -48,7 +60,6 @@ const TabsList = styled(TabsListUnstyled)`
 `;
 const Box = styled(MuiBox)(({ theme }) => ({
   backgroundColor: '#1c2127',
-  boxShadow: '0 4px 0 #22272d',
   borderRadius: '4px'
 }));
 const Slider = styled(MuiSlider)(({ theme }) => ({
@@ -96,15 +107,17 @@ const Slider = styled(MuiSlider)(({ theme }) => ({
 }));
 
 const TextField = styled(MuiTextField)(({ theme }) => ({
-  background: '#2c3137',
+  background: '#1c2127',
   fontFamily: 'Montserrat',
   borderRadius: '5px',
   '& .MuiOutlinedInput-input': {
-      padding: '1px 1px',
-      fontSize: 14,
+    padding: '1px 1px',
+    fontSize: 18,
+    textAlign: 'right',
+
   },
   '& .MuiOutlinedInput-notchedOutline': {
-      display: 'none'
+    display: 'none'
   }
 }));
 
@@ -120,7 +133,7 @@ function ValueLabelComponent(props) {
 
 export default function RightSlider({ payout, setPayout }) {
   return (
-    <Stack px={0.25} py={0.5} borderRadius={1} spacing={1} className="bg-dark">
+    <Stack px={0.25} py={0.5} borderRadius={1} spacing={0.5} className="bg-dark">
       <TabsUnstyled defaultValue={0}>
         <TabsList>
           <Tab sx={{ fontFamily: 'Montserrat', textTransform: 'uppercase' }}>Base</Tab>
@@ -130,60 +143,66 @@ export default function RightSlider({ payout, setPayout }) {
 
       <Box width="100%">
         <Grid container columns={9} spacing={0.5}>
-          <Grid item xs={9} md={7}>
+          <Grid item xs={7} md={7}>
             <Box bgcolor="black" borderRadius={1} p={1}>
               <Stack direction="row" justifyContent="space-between" alignItems="center">
                 <Typography
                   color="white"
-                  sx={{ display: 'flex', alignItems: 'center' }}
-                  fontSize={12}
-                  fontWeight={800}
+                  sx={{ display: 'flex', alignItems: 'center', fontSize: {lg:14, md:12, sm:10, xs:10} }}
+                  fontWeight={700}
+                  pl={1}
                   fontFamily="Montserrat"
                 >
                   Payout <ArrowDropDownIcon sx={{ fontSize: 16 }} />
-                  </Typography>
+                </Typography>
 
                 <TextField
                   type="number"
                   value={payout}
                   onChange={(e) => setPayout(e.target.value)}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">
+                      <Stack direction="row" alignItems="center" spacingnpm={1}>
+                        <Typography
+                          color="#f8bf60"
+                          fontWeight={700}
+                          fontFamily="Montserrat"
+                          sx={{ fontSize: { lg:14, md:12, sm: 10, xs:10 } }}
+                        >
+                          X
+                        </Typography>
+                      </Stack>
+                    </InputAdornment>
+                  }}
                 />
- 
-                <Typography
-                  color="white"
-                  fontSize={14}
-                  fontWeight={700}
-                  fontFamily="Montserrat"
-                >X</Typography>
+
               </Stack>
             </Box>
           </Grid>
 
-          <Grid item xs={9} md={1}>
+          <Grid item md={1} xs={1} sx={{ borderLeft: '2px solid #2c3137' }}>
             <Box bgcolor="black" borderRadius={1} p={1}>
               <Stack justifyContent="center">
                 <Typography
                   color="white"
-                  fontSize={16}
                   fontWeight={800}
                   fontFamily="Montserrat"
                   textAlign="center"
-                ><Typography variant="span" fontSize={12}>1/2</Typography></Typography>
+                ><Typography variant="span" sx={{ fontSize: { lg: 14, md: 12, sm: 10, xs: 10 } }}>1/2</Typography></Typography>
               </Stack>
             </Box>
           </Grid>
 
-          <Grid item xs={9} md={1}>
+          <Grid item md={1} xs={1} sx={{ borderLeft: '2px solid #2c3137' }}>
             <Box bgcolor="black" borderRadius={1} p={1}>
               <Stack justifyContent="center">
                 <Typography
                   color="white"
-                  fontSize={16}
                   fontWeight={800}
                   fontFamily="Montserrat"
                   textAlign="center"
                 >
-                  <Typography variant="span" fontSize={12}>
+                  <Typography variant="span" sx={{ fontSize: { lg: 14, md: 12, sm: 10, xs: 10 } }}>
                     x2
                   </Typography>
                 </Typography>
@@ -200,7 +219,10 @@ export default function RightSlider({ payout, setPayout }) {
             ValueLabel: ValueLabelComponent,
           }}
           aria-label="custom thumb label"
-          defaultValue={20}
+          value={payout}
+          min={0}
+          max={100000}
+          onChange={(e) => setPayout(e.target.value)}
         />
       </Stack>
     </Stack>

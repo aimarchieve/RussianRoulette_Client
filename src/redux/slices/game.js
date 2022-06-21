@@ -77,17 +77,13 @@ export function addNewGame(wagered, payout, username, game, type, _id) {
       } else {
         balance = balance + (Number(wagered) * Number(payout));
       }
-      console.log("current balance", balance);
       await api.put(`/userInfo/updateUserInfoById/${_id}`, { balance });
-
       setTimeout(() => {
         dispatch(slice.actions.getBalance(balance));
-
         const oldUserInfo = JSON.parse(localStorage.getItem('userinfo'));
         const newUserInfo = { ...oldUserInfo, balance };
         localStorage.setItem('userinfo', JSON.stringify(newUserInfo));
       }, 5500)
-
     } catch (error) {
       console.log('# error => ', error);
       dispatch(slice.actions.hasError(error));

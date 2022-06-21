@@ -22,7 +22,7 @@ import DiamondIcon from '@mui/icons-material/Diamond';
 import { useDispatch, useSelector } from '../../redux/store';
 import useAuth from '../../hooks/useAuth';
 import { addStaking } from '../../redux/slices/staking';
-
+import useWallet from '../../hooks/useWallet';
 
 /* ---------------------------------------------------------------------------------------------------- */
 const Slider = styled(MuiSlider)(({ theme }) => ({
@@ -131,6 +131,8 @@ export default function Gems() {
     const [ stake, setStake ] = useState(0);
     const [ receiveAmount, setReceiveAmount ] = useState(0);
     const [ type, setType ] = useState("Staking");
+    const { modalIsOpened, closeWalletModal } = useWallet();
+
     const openBondPanel = () => {
         setBond(true);
         setSwap(false);
@@ -147,7 +149,7 @@ export default function Gems() {
     }
 
     const startStaking = () => {
-        console.log("Staking:", currentUser.username, stake, receiveAmount, type, currentUser._id, currentUser.balance);
+        closeWalletModal();
         if(currentUser){
             dispatch(addStaking(currentUser.username, stake, receiveAmount, type, currentUser._id, currentUser.balance));
         }

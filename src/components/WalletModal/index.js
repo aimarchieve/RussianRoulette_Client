@@ -117,11 +117,8 @@ const DialogTitle = (props) => {
 export default function WalletModal() {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-
-  const { modalIsOpened, currentTab, closeWalletModal, handleCurrentTab } = useWallet();
-
+  const { modalIsOpened, closeWalletModal } = useWallet();
   const [cryptoType, setCryptoType] = useState('btc');
-
   const [cashier, setCashier] = useState(true);
   const [gems, setGems] = useState(false);
   const [_yield, setYield] = useState(false);
@@ -132,7 +129,6 @@ export default function WalletModal() {
     setGems(false);
     setYield(false);
     setTip(false);
-    closeWalletModal();
   }
   const openGemsPanel = () => {
     setGems(true);
@@ -152,17 +148,24 @@ export default function WalletModal() {
     setGems(false);
     setYield(false);
   }
+  const closeAndSetDefault = () => {
+    closeWalletModal();
+    setCashier(true);
+    setGems(false);
+    setTip(false);
+    setYield(false);
+  }
 
   return (
     <Dialog
       fullScreen={fullScreen}
       open={modalIsOpened}
-      onClose={openCashierPanel}
+      onClose={closeAndSetDefault}
       aria-labelledby="responsive-dialog-title"
       fullWidth={true}
       maxWidth="sm"
     >
-      <DialogTitle id="responsive-dialog-title" onClose={openCashierPanel}>
+      <DialogTitle id="responsive-dialog-title" onClose={closeAndSetDefault}>
         <Typography fontSize={18} fontWeight={600} fontFamily="Montserrat" textTransform="uppercase" >
           Wallet
         </Typography>

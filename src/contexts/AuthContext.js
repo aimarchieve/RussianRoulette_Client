@@ -4,7 +4,6 @@ import api from '../utils/api';
 
 const initialState = {
   modalIsOpened: false,
-  currentTab: 'login',
   currentUser: null,
   token: ''
 };
@@ -57,7 +56,6 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     let userInfo = localStorage.getItem('userinfo');
-    console.log('# userInfo => ', userInfo);
     if (userInfo) {
       dispatch({
         type: 'SET_CURRENT_USER',
@@ -108,7 +106,6 @@ function AuthProvider({ children }) {
   const signup = (newUserData) => {
     console.log(newUserData);
     api.post('/userinfo/signup', newUserData)
-    // api.post('/auth/signup', newUserData)
       .then(response => {
         console.log(response.data);
         localStorage.setItem('userinfo', JSON.stringify(response.data));
@@ -146,11 +143,11 @@ function AuthProvider({ children }) {
 
   //  Sign in
   const signin = (userdata) => {
+    console.log("sign in =======", userdata);
     api.post('/userinfo/signin', userdata)
       .then(response => {
         console.log(response.data);
         localStorage.setItem('userinfo', JSON.stringify(response.data));
-
         dispatch({
           type: 'SET_CURRENT_USER',
           payload: response.data.currentUser

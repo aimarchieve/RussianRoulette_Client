@@ -21,7 +21,7 @@ const Tab = styled(TabUnstyled)`
   font-weight: bold;
   background-color: transparent;
   width: 100%;
-  padding: 15px;
+  padding: 10px;
   border: none;
   border-radius: 3px;
   display: flex;
@@ -96,18 +96,17 @@ export default function TopWinnersSidebar(props) {
   const { openUserStatsModal } = useUserStats();
 
   return (
-    <Stack spacing={0.5}>
+    <Stack spacing={0.5} sx={{ height: '82vh' }}>
       <Box p={1} borderRadius={1} className="bg-dark">
         <Typography
           color="white"
-          fontSize={16}
           fontWeight={700}
           fontFamily="Montserrat"
           textTransform="uppercase"
-          sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: { lg:16, md:14, sm:12, xs:12 } }}
         >
           Top winners(24h)
-          <ArrowDropDownIcon sx={{ fontSize: 38 }} />
+          <ArrowDropDownIcon sx={{ fontSize: { lg:38, md:35, sm: 32, xs: 29 } }} />
         </Typography>
       </Box>
 
@@ -187,7 +186,7 @@ export default function TopWinnersSidebar(props) {
                 ))
               }
               {
-                [36, 37, 38, 39, 40].map(itemIndex => (
+                [36, 37].map(itemIndex => (
                   <TableRow key={itemIndex}>
                     <TableCell
                       sx={{
@@ -232,7 +231,7 @@ export default function TopWinnersSidebar(props) {
           </IconButton>
         </Box>
       </Box>
-      <Box p={1} borderRadius={1} className="bg-dark">
+      <Box borderRadius={1} className="bg-dark">
         <Typography
           align="right"
           color="white"
@@ -243,7 +242,12 @@ export default function TopWinnersSidebar(props) {
         >
           mode
         </Typography>
-        <Box sx={{ marginBottom: '10px' }}>
+        <Box
+          width="85%"
+          margin="auto"
+          mb={3.5}
+          mt={1}
+        >
           <TabsUnstyled defaultValue={0}>
             <TabsList>
               <Tab sx={{ fontFamily: 'Montserrat', textTransform: 'uppercase' }} onClick={() => props.setGameMode("group")}>group</Tab>
