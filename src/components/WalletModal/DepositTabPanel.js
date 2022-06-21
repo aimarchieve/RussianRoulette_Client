@@ -39,7 +39,6 @@ export default function DepositTabPanel() {
   const dispatch = useDispatch();
   const { generatedAddress } = useSelector((state) => state.getAddress);
 
-
   return (
     <Stack spacing={3}>
       <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={0.5}>
