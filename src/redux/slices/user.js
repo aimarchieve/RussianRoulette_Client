@@ -8,7 +8,6 @@ import api from '../../utils/api';
 const initialState = {
   isLoading: false,
   error: false,
-  posts: [],
 };
 
 const slice = createSlice({
@@ -24,12 +23,6 @@ const slice = createSlice({
     hasError(state, action) {
       state.isLoading = false;
       state.error = action.payload;
-    },
-
-    // GET POSTS
-    getPostsSuccess(state, action) {
-      state.isLoading = false;
-      state.posts = action.payload;
     },
     getUserName(state, action) {
         state.isLoading = false;
@@ -58,59 +51,3 @@ export function getUserName(){
 }
 
 // ----------------------------------------------------------------------
-
-export function getPostsInitial(index, step) {
-  return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
-    try {
-      const response = await axios.get('/api/blog/posts', {
-        params: { index, step }
-      });
-      const results = response.data.results.length;
-      const { maxLength } = response.data;
-
-      dispatch(slice.actions.getPostsInitial(response.data.results));
-
-      if (results >= maxLength) {
-        dispatch(slice.actions.noHasMore());
-      }
-    } catch (error) {
-      dispatch(slice.actions.hasError(error));
-    }
-  };
-}
-
-// ----------------------------------------------------------------------
-
-export function getPost(title) {
-  return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
-    try {
-      const response = await axios.get('/api/blog/post', {
-        params: { title }
-      });
-      dispatch(slice.actions.getPostSuccess(response.data.post));
-    } catch (error) {
-      console.error(error);
-      dispatch(slice.actions.hasError(error));
-    }
-  };
-}
-
-// ----------------------------------------------------------------------
-
-export function getRecentPosts(title) {
-  return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
-    try {
-      const response = await axios.get('/api/blog/posts/recent', {
-        params: { title }
-      });
-
-      dispatch(slice.actions.getRecentPostsSuccess(response.data.recentPosts));
-    } catch (error) {
-      console.error(error);
-      dispatch(slice.actions.hasError(error));
-    }
-  };
-}
