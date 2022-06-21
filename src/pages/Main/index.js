@@ -18,7 +18,7 @@ import Button from '@mui/material/Button';
 import { Icon } from '@iconify/react';
 import GunAnimation from './GunAnimation';
 import './style.css';
-import { STATES } from 'mongoose';
+// import { STATES } from 'mongoose';
 import { addNewGame } from '../../redux/slices/game';
 import { useDispatch, useSelector } from '../../redux/store';
 import Marquee from "react-easy-marquee";

@@ -7,6 +7,7 @@ import api from '../../utils/api';
 const initialState = {
     isLoading: false,
     error: false,
+    generatedAddress: '',
 };
 
 const slice = createSlice({
@@ -23,6 +24,11 @@ const slice = createSlice({
             state.isLoading = false;
             state.error = action.payload;
         },
+        getGeneratedAddress(state, action) {
+            state.isLoading = false;
+            state.generatedAddress = action.payload;
+        },
+
     }
 });
 
@@ -49,7 +55,8 @@ export function getAddress(walletId, blockchain, network) {
             const response = await api.post(
                 `https://rest.cryptoapis.io/v2/wallet-as-a-service/wallets/${walletId}/${blockchain}/${network}/addresses?context=yourExampleString`,
                 context);
-            console.log("getAddress Result: ", response.data);
+            console.log("getGeneratedAddress Result: ", response.data);
+            dispatch(slice.actions.getGeneratedAddress(response.data.address));
         } catch (error) {
             console.log('# get Address Error => ', error);
             dispatch(slice.actions.hasError(error));

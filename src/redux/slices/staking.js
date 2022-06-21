@@ -25,6 +25,7 @@ const slice = createSlice({
       state.error = action.payload;
     },
 
+    
   }
 });
 
