@@ -29,9 +29,6 @@ import { useDispatch, useSelector } from '../redux/store';
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-// const pages_logout = ['Login', 'Register'];
-// const pages_login = ['Wallet', 'Log out'];
-
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   backgroundColor: '#1c2127',
   backgroundImage: 'none'

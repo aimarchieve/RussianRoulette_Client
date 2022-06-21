@@ -1,6 +1,5 @@
 import { merge } from 'lodash';
 import ReactApexChart from 'react-apexcharts';
-//
 import BaseOptionChart from './BaseOptionChart';
 
 // ----------------------------------------------------------------------
