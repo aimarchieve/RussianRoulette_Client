@@ -26,7 +26,6 @@ import AccountModal from './AccountModal';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { useDispatch, useSelector } from '../redux/store';
-import Button from '@mui/material/Button';
 
 /* ---------------------------------------------------------------------------------------------------- */
 

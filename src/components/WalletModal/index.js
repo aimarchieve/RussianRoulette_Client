@@ -11,7 +11,6 @@ import {
   Typography,
   TextField as MuiTextField,
   Icon as MuiIcon,
-  Stack
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
@@ -25,7 +24,6 @@ import Cashier from './Cashier';
 import Gems from './Gems';
 import Yield from './Yield';
 import Tip from './Tip';
-import { set } from 'mongoose';
 
 /* ---------------------------------------------------------------------------------------- */
 
