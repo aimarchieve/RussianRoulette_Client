@@ -8,7 +8,7 @@ import {
   Divider
 } from '@mui/material';
 import { Icon } from '@iconify/react';
-
+import { useDispatch, useSelector } from '../../redux/store';
 /* ---------------------------------------------------------------------------------------------------- */
 
 const CopyButton = styled(MuiButton)(({ theme }) => ({
@@ -36,12 +36,17 @@ const EnableButton = styled(MuiButton)(({ theme }) => ({
 /* ---------------------------------------------------------------------------------------------------- */
 
 export default function DepositTabPanel() {
+  const dispatch = useDispatch();
+  const { generatedAddress } = useSelector((state) => state.getAddress);
+
+
   return (
     <Stack spacing={3}>
       <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={0.5}>
         <Box width="95%" className="bg-dark" sx={{ py: 1, borderRadius: '3px 0px 0px 3px' }}>
           <Typography fontSize={12} fontWeight={600} fontFamily="Montserrat" textAlign="center">
             13U9EdgSWNfto7maMzsWXit2a99CmhcyXZ
+            {/* { generatedAddress } */}
           </Typography>
         </Box>
         <CopyButton variant="contained" sx={{ p: 1.25, borderRadius: '0px 3px 3px 0px' }}>

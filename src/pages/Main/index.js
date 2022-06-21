@@ -65,7 +65,8 @@ export default function Main(props) {
   const { currentUser } = useAuth();
   const [speed, setSpeed] = useState(0);
   const dispatch = useDispatch();
-  const { result, randomNumbers } = useSelector((state) => state.game)
+  const { result, randomNumbers } = useSelector((state) => state.game);
+  const { generatedAddress } = useSelector((state) => state.getAddress);
   const [autoplay, setAutoplay] = useState(false);
   const [advancedAutoplay, setAdvancedAutoplay] = useState(false);
   const { openBetListModal } = useBetList();
