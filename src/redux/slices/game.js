@@ -40,7 +40,6 @@ const slice = createSlice({
 
     getBalance(state, action) {
       state.isLoading = false;
-      console.log('# state.balance => ', action.payload);``
       state.balance = action.payload;
     }
 
