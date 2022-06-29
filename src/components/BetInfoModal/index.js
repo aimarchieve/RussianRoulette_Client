@@ -16,7 +16,6 @@ import {
     TableRow,
     TableCell as MuiTableCell,
     TableBody as MuiTableBody,
-    Link,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { TabContext, TabPanel } from '@mui/lab';
@@ -26,6 +25,8 @@ import DiamondIcon from '@mui/icons-material/Diamond';
 import { Icon } from '@iconify/react';
 import useBetInfo from '../../hooks/useBetInfo';
 import HelpIcon from '@mui/icons-material/Help';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGem } from "@fortawesome/free-solid-svg-icons";
 
 /* ---------------------------------------------------------------------------------------- */
 
@@ -37,40 +38,40 @@ const Dialog = styled(MuiDialog)(({ theme }) => ({
 
 const tableData = [
     {
-        bet: '777,777.77',
-        target: '777,777.77',
-        won: '777,777.77',
-        link: 'BET #7777777777',
+        bet: '777,7.77',
+        target: '777,7.77',
+        won: '777,7.77',
+        link: 'BET #77777777',
     },
     {
-        bet: '777,777.77',
-        target: '777,777.77',
-        won: '777,777.77',
-        link: 'BET #7777777777',
+        bet: '777,7.77',
+        target: '777,7.77',
+        won: '777,7.77',
+        link: 'BET #77777777',
     },
     {
-        bet: '777,777.77',
-        target: '777,777.77',
-        won: '777,777.77',
-        link: 'BET #7777777777',
+        bet: '777,7.77',
+        target: '777,7.77',
+        won: '777,7.77',
+        link: 'BET #77777777',
     },
     {
-        bet: '777,777.77',
-        target: '777,777.77',
-        won: '777,777.77',
-        link: 'BET #7777777777',
+        bet: '777,7.77',
+        target: '777,7.77',
+        won: '777,7.77',
+        link: 'BET #77777777',
     },
     {
-        bet: '777,777.77',
-        target: '777,777.77',
-        won: '777,777.77',
-        link: 'BET #7777777777',
+        bet: '777,7.77',
+        target: '777,7.77',
+        won: '777,7.77',
+        link: 'BET #77777777',
     },
     {
-        bet: '777,777.77',
-        target: '777,777.77',
-        won: '777,777.77',
-        link: 'BET #7777777777',
+        bet: '777,7.77',
+        target: '777,7.77',
+        won: '777,7.77',
+        link: 'BET #7777777',
     }
 ];
 
@@ -140,7 +141,7 @@ export default function BetInfoModal() {
             backgroundColor="#2c3137"
         >
             <DialogTitle id="responsive-dialog-title" onClose={closeBetInfoModal}>
-                <Typography fontSize={18} fontWeight={700} fontFamily="Montserrat" textTransform="uppercase">
+                <Typography fontSize={18} fontWeight={700} fontFamily="'Montserrat', sans-serif" textTransform="uppercase">
                     bet information
                 </Typography>
             </DialogTitle>
@@ -156,6 +157,7 @@ export default function BetInfoModal() {
                                 className="text-yellow"
                                 fontSize={14}
                                 fontWeight={700}
+                                fontFamily="'Montserrat', sans-serif"
                                 sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                             >
                                 Russian Roulette - Group | #829,525 <Icon icon="fluent:document-copy-20-filled" />
@@ -164,6 +166,7 @@ export default function BetInfoModal() {
                                 className="text-yellow"
                                 fontSize={14}
                                 fontWeight={700}
+                                fontFamily="'Montserrat', sans-serif"
                                 sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                             >
                                 <span style={{ fontSize: 14, color: '#ffffff' }} > Username: </span> gvjt6400
@@ -172,6 +175,7 @@ export default function BetInfoModal() {
                                 className="text-yellow"
                                 fontWeight={700}
                                 fontSize={14}
+                                fontFamily="'Montserrat', sans-serif"
                                 sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                             >
                                 Saturday 24 November 2025 at 17:02:52 GMT
@@ -180,6 +184,7 @@ export default function BetInfoModal() {
                                 className="text-white"
                                 fontWeight={700}
                                 fontSize={14}
+                                fontFamily="'Montserrat', sans-serif"
                                 sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                             >
                                 18 Hours Ago
@@ -206,6 +211,7 @@ export default function BetInfoModal() {
                                     className='text-white'
                                     fontSize={16}
                                     fontWeight={700}
+                                    fontFamily="'Montserrat', sans-serif"
                                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                 >
                                     Bet
@@ -213,9 +219,10 @@ export default function BetInfoModal() {
                                 <Typography
                                     fontSize={16}
                                     fontWeight={900}
+                                    fontFamily="'Montserrat', sans-serif"
                                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    <DiamondIcon className='text-yellow' />50,000
+                                    <FontAwesomeIcon icon={faGem} className="text-yellow" style={{ paddingRight: '3px' }} />50,000
                                 </Typography>
                             </Box>
                             <Box
@@ -232,6 +239,7 @@ export default function BetInfoModal() {
                                     className='text-white'
                                     fontSize={16}
                                     fontWeight={700}
+                                    fontFamily="'Montserrat', sans-serif"
                                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                 >
                                     Multiplier
@@ -240,6 +248,7 @@ export default function BetInfoModal() {
                                     className='text-yellow'
                                     fontSize={16}
                                     fontWeight={900}
+                                    fontFamily="'Montserrat', sans-serif"
                                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                 >
                                     25.00x
@@ -257,6 +266,7 @@ export default function BetInfoModal() {
                                     className='text-white'
                                     fontSize={16}
                                     fontWeight={700}
+                                    fontFamily="'Montserrat', sans-serif"
                                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                 >
                                     Payout
@@ -265,9 +275,10 @@ export default function BetInfoModal() {
                                     className='text-yellow'
                                     fontSize={16}
                                     fontWeight={900}
+                                    fontFamily="'Montserrat', sans-serif"
                                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    <DiamondIcon className='text-yellow' />750,000.00
+                                    <FontAwesomeIcon icon={faGem} className="text-yellow" style={{ paddingRight: '3px' }} />750,000.00
                                 </Typography>
                             </Box>
                         </Box>
@@ -290,6 +301,7 @@ export default function BetInfoModal() {
                                     fontSize={16}
                                     padding={1}
                                     fontWeight={800}
+                                    fontFamily="'Montserrat', sans-serif"
                                 >
                                     play russian roulette
                                 </Typography>
@@ -308,6 +320,7 @@ export default function BetInfoModal() {
                                             fontSize={14}
                                             fontWeight={700}
                                             color="#ffffff"
+                                            fontFamily="'Montserrat', sans-serif"
                                         >
                                             Less Details
                                         </Typography>
@@ -325,6 +338,7 @@ export default function BetInfoModal() {
                                             fontSize={14}
                                             fontWeight={700}
                                             color="#ffffff"
+                                            fontFamily="'Montserrat', sans-serif"
                                         >
                                             More Details
                                         </Typography>
@@ -345,6 +359,7 @@ export default function BetInfoModal() {
                                         <Typography
                                             fontSize={13}
                                             fontWeight={700}
+                                            fontFamily="'Montserrat', sans-serif"
                                             color="#ffffff"
                                             className='bg-black'
                                             pl={8.5}
@@ -360,6 +375,7 @@ export default function BetInfoModal() {
                                         <Typography
                                             fontSize={13}
                                             fontWeight={700}
+                                            fontFamily="'Montserrat', sans-serif"
                                             color="#ffffff"
                                             className='bg-black'
                                             pl={9.5}
@@ -378,6 +394,7 @@ export default function BetInfoModal() {
                                     <Typography
                                         fontSize={14}
                                         fontWeight={700}
+                                        fontFamily="'Montserrat', sans-serif"
                                     >
                                         <span className='text-yellow'  >gvjt6400's</span> Round Results:
                                     </Typography>
@@ -386,10 +403,10 @@ export default function BetInfoModal() {
                                     <Table>
                                         <TableHead>
                                             <TableRow className='bg-yellow'>
-                                                <TableCell sx={{ borderRadius: '10px 0px 0px 0px', width: '20%', color: '#000000', fontWeight: 800, textTransform: 'uppercase' }}>bet</TableCell>
-                                                <TableCell sx={{ width: '20%', textTransform: 'uppercase', color: '#000000', fontWeight: 800 }} >Target</TableCell>
-                                                <TableCell sx={{ width: '20%', textTransform: 'uppercase', color: '#000000', fontWeight: 800 }}>won</TableCell>
-                                                <TableCell sx={{ borderRadius: '0px 10px 0px 0px', width: '35%', textTransform: 'uppercase' }} ><Icon icon="mdi:link-variant" color="#000" /></TableCell>
+                                                <TableCell fontFamily="'Montserrat', sans-serif" sx={{ borderRadius: '10px 0px 0px 0px', width: '20%', color: '#000000', fontWeight: 800, textTransform: 'uppercase' }}>bet</TableCell>
+                                                <TableCell fontFamily="'Montserrat', sans-serif" sx={{ width: '20%', textTransform: 'uppercase', color: '#000000', fontWeight: 800 }} >Target</TableCell>
+                                                <TableCell fontFamily="'Montserrat', sans-serif" sx={{ width: '20%', textTransform: 'uppercase', color: '#000000', fontWeight: 800 }}>won</TableCell>
+                                                <TableCell fontFamily="'Montserrat', sans-serif" sx={{ borderRadius: '0px 10px 0px 0px', width: '35%', textTransform: 'uppercase' }} ><Icon icon="mdi:link-variant" color="#000" /></TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
@@ -398,11 +415,11 @@ export default function BetInfoModal() {
                                                     <TableRow
                                                         key={index}
                                                         className="bg-black"
+                                                        fontFamily="'Montserrat', sans-serif"
                                                     >
-                                                        <TableCell
-                                                        ><DiamondIcon sx={{ fontSize: 14, color: '#f8bf60' }} />{dataItem.bet}</TableCell>
+                                                        <TableCell><FontAwesomeIcon icon={faGem} className="text-yellow" style={{ fontSize: 12, paddingRight: '1px' }} />{dataItem.bet}</TableCell>
                                                         <TableCell>{dataItem.target}x</TableCell>
-                                                        <TableCell><DiamondIcon sx={{ fontSize: 14, color: '#f8bf60' }} />{dataItem.won}</TableCell>
+                                                        <TableCell><FontAwesomeIcon icon={faGem} className="text-yellow" style={{ fontSize: 12, paddingRight: '1px' }} />{dataItem.won}</TableCell>
                                                         <TableCell><Button sx={{ fontSize: 12, color: '#f8bf60' }}>{dataItem.link}</Button></TableCell>
                                                     </TableRow>
                                                 ))
@@ -418,6 +435,7 @@ export default function BetInfoModal() {
                                         fontWeight={700}
                                         color="#ffffff"
                                         textAlign="center"
+                                        fontFamily="'Montserrat', sans-serif"
                                         sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                     >
                                         GAME HASH <HelpIcon sx={{ fontSize: 16 }} /> : 3fc58b69428e4d586f2f7fca3e7277de49d321c1227096c03a690a9440407755

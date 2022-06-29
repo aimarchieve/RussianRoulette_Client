@@ -131,10 +131,10 @@ export default function TransactionsTabPanel() {
         {
           synData.map(dataItem => (
             <Stack key={dataItem.name} direction="row" justifyContent="space-between" alignItems="center">
-              <Typography fontSize={12} fontWeight={700} fontFamily="Montserrat">
+              <Typography fontSize={12} fontWeight={700} fontFamily="'Montserrat', sans-serif">
                 {dataItem.name}
               </Typography>
-              <Typography fontSize={12} fontWeight={700} fontFamily="Montserrat">
+              <Typography fontSize={12} fontWeight={700} fontFamily="'Montserrat', sans-serif">
                 {dataItem.value} <DiamondIcon sx={{ fontSize: 13 }} className="text-yellow" />
               </Typography>
             </Stack>
@@ -145,7 +145,7 @@ export default function TransactionsTabPanel() {
       <Divider />
 
       <Stack direction="row" justifyContent="space-between" alignItems="center" px={1}>
-        <Typography fontSize={12} fontWeight={700} fontFamily="Montserrat">
+        <Typography fontSize={12} fontWeight={700} fontFamily="'Montserrat', sans-serif">
           Hide stats from public
         </Typography>
 

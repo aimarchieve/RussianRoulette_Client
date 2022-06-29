@@ -90,23 +90,23 @@ export default function _2FATabPanel() {
   return (
     <Stack spacing={2}>
       <Stack spacing={1.5}>
-        <Typography fontSize={16} fontWeight={700} fontFamily="Montserrat" textAlign="center">
+        <Typography fontSize={16} fontWeight={700} fontFamily="'Montserrat', sans-serif" textAlign="center">
           Two-Factor Authentication
         </Typography>
-        <Typography color={grey[500]} fontSize={14} fontWeight={700} fontFamily="Montserrat" textAlign="center">
+        <Typography color={grey[500]} fontSize={14} fontWeight={700} fontFamily="'Montserrat', sans-serif" textAlign="center">
           1. Scan the QR code or enter the 'Key manually into your authenticator app or device'
         </Typography>
-        <Typography color={grey[500]} fontSize={14} fontWeight={700} fontFamily="Montserrat" textAlign="center">
+        <Typography color={grey[500]} fontSize={14} fontWeight={700} fontFamily="'Montserrat', sans-serif" textAlign="center">
           2. Lastly, enter the 2FA code you receive from the authenticator app or device and your password to complete 2FA setup.
         </Typography>
-        <Typography color={grey[500]} fontSize={14} fontWeight={700} fontFamily="Montserrat" textAlign="center">
+        <Typography color={grey[500]} fontSize={14} fontWeight={700} fontFamily="'Montserrat', sans-serif" textAlign="center">
           Key:
         </Typography>
       </Stack>
       <Stack spacing={1.5}>
         <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={0.5}>
           <Box width="95%" className="bg-dark" sx={{ py: 1, borderRadius: '3px 0px 0px 3px' }}>
-            <Typography fontSize={12} fontWeight={600} fontFamily="Montserrat" textAlign="center">
+            <Typography fontSize={12} fontWeight={600} fontFamily="'Montserrat', sans-serif" textAlign="center">
               13U9EdgSWNfto7maMzsWXit2a99CmhcyXZ
             </Typography>
           </Box>
@@ -128,7 +128,7 @@ export default function _2FATabPanel() {
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={
             formik.touched.password && formik.errors.password ? (
-              <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+              <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
                 <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
                 {formik.touched.password && formik.errors.password}
               </Typography>) : (<></>)
@@ -145,7 +145,7 @@ export default function _2FATabPanel() {
           error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
           helperText={
             formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-              <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+              <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
                 <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
                 {formik.touched.confirmPassword && formik.errors.confirmPassword}
               </Typography>) : (<></>)

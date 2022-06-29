@@ -16,8 +16,6 @@ import {
     TableRow,
     TableCell as MuiTableCell,
     TableBody as MuiTableBody,
-    Link,
-    Slider as MuiSlider
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { TabContext, TabPanel } from '@mui/lab';
@@ -29,6 +27,8 @@ import DiamondIcon from '@mui/icons-material/Diamond';
 import { Icon } from '@iconify/react';
 import useBetInfo from '../../hooks/useBetInfo';
 import BetInfoModal from '../BetInfoModal';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGem } from "@fortawesome/free-solid-svg-icons";
 
 /* ---------------------------------------------------------------------------------------- */
 
@@ -75,7 +75,7 @@ const TableHead = styled(MuiTableHead)(({ theme }) => ({
 
 const TableCell = styled(MuiTableCell)(({ theme }) => ({
     textAlign: 'center',
-    fontFamily: 'Montserrat',
+    fontFamily: "'Montserrat', sans-serif",
     fontSize: 12,
     border: '2px solid #2c3137',
     paddingTop: 5,
@@ -137,7 +137,7 @@ export default function GameInfoModal() {
             backgroundColor="#2c3137"
         >
             <DialogTitle id="responsive-dialog-title" onClose={closeGameInfoModal}>
-                <Typography fontSize={18} fontWeight={700} fontFamily="Montserrat" textTransform="uppercase">
+                <Typography fontSize={18} fontWeight={700} fontFamily="'Montserrat', sans-serif" textTransform="uppercase">
                     game information
                 </Typography>
             </DialogTitle>
@@ -153,6 +153,7 @@ export default function GameInfoModal() {
                                 className="text-yellow"
                                 fontSize={14}
                                 fontWeight={700}
+                                fontFamily="'Montserrat', sans-serif"
                                 sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                             >
                                 Russian Roulette - Group | #5,939,096 <Icon icon="fluent:document-copy-20-filled" />
@@ -161,6 +162,7 @@ export default function GameInfoModal() {
                                 className="text-yellow"
                                 fontWeight={700}
                                 fontSize={14}
+                                fontFamily="'Montserrat', sans-serif"
                                 sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                             >
                                 Saturday 24 November 2025 at 17:02:52 GMT
@@ -169,6 +171,7 @@ export default function GameInfoModal() {
                                 className="text-white"
                                 fontWeight={700}
                                 fontSize={14}
+                                fontFamily="'Montserrat', sans-serif"
                                 sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                             >
                                 18 Hours Ago
@@ -184,6 +187,7 @@ export default function GameInfoModal() {
                                 className='text-white'
                                 fontSize={16}
                                 fontWeight={700}
+                                fontFamily="'Montserrat', sans-serif"
                                 sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                             >
                                 Result
@@ -192,6 +196,7 @@ export default function GameInfoModal() {
                                 className='text-yellow'
                                 fontSize={16}
                                 fontWeight={900}
+                                fontFamily="'Montserrat', sans-serif"
                                 sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                             >
                                 750.00x
@@ -211,6 +216,7 @@ export default function GameInfoModal() {
                                     fontSize={16}
                                     padding={1}
                                     fontWeight={800}
+                                    fontFamily="'Montserrat', sans-serif"
                                 >
                                     play russian roulette
                                 </Typography>
@@ -229,6 +235,7 @@ export default function GameInfoModal() {
                                             fontSize={14}
                                             fontWeight={700}
                                             color="#ffffff"
+                                            fontFamily="'Montserrat', sans-serif"
                                         >
                                             Less Details
                                         </Typography>
@@ -241,6 +248,7 @@ export default function GameInfoModal() {
                                             fontSize={14}
                                             fontWeight={700}
                                             color="#ffffff"
+                                            fontFamily="'Montserrat', sans-serif"
                                         >
                                             More Details
                                         </Typography>
@@ -261,6 +269,7 @@ export default function GameInfoModal() {
                                         <Typography
                                             fontSize={13}
                                             fontWeight={700}
+                                            fontFamily="'Montserrat', sans-serif"
                                             color="#ffffff"
                                             className='bg-black'
                                             pl={8.5}
@@ -283,6 +292,7 @@ export default function GameInfoModal() {
                                             pt={1}
                                             pb={1}
                                             borderRadius="0px 5px 5px 0px"
+                                            fontFamily="'Montserrat', sans-serif"
                                         >
                                             Next Game
                                         </Typography>
@@ -307,9 +317,9 @@ export default function GameInfoModal() {
                                                         className="bg-black"
                                                     >
                                                         <TableCell>{dataItem.player}</TableCell>
-                                                        <TableCell><DiamondIcon sx={{ fontSize: 14, color: '#f8bf60' }} />{dataItem.bet}</TableCell>
+                                                        <TableCell><FontAwesomeIcon icon={faGem} className="text-yellow" style={{ paddingRight: '1px' }} />{dataItem.bet}</TableCell>
                                                         <TableCell>{dataItem.payout}x</TableCell>
-                                                        <TableCell><DiamondIcon sx={{ fontSize: 14, color: '#f8bf60' }} />{dataItem.win}</TableCell>
+                                                        <TableCell><FontAwesomeIcon icon={faGem} className="text-yellow" style={{ paddingRight: '1px' }} />{dataItem.win}</TableCell>
                                                         <TableCell><Button onClick={ openBetInfoModal } sx={{ fontSize: 12, color: '#f8bf60' }}>{dataItem.link}</Button></TableCell>
                                                     </TableRow>
                                                 ))
@@ -325,6 +335,7 @@ export default function GameInfoModal() {
                                         fontWeight={700}
                                         color="#ffffff"
                                         textAlign="center"
+                                        fontFamily="'Montserrat', sans-serif"
                                     >
                                         GAME HASH: 3fc58b69428e4d586f2f7fca3e7277de49d321c1227096c03a690a9440407755
                                     </Typography>

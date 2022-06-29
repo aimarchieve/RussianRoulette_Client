@@ -7,7 +7,7 @@ export default function Header() {
     <Stack sx={{ mt: {xs:2} }}>
       <Stack sx={{ mx: {lg:4, md:3, sm:2, xs:1} }}>
         {/* Upper row */}
-        <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ py: 2 }}>
+        <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ pb: 2 }}>
           <Typography
             align="center"
             sx={{
@@ -68,8 +68,8 @@ export default function Header() {
         {/* Sub row */}
         <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ pb: 1 }}>
           <Stack sx={{ color: 'white', width: '6%' }}>
-            <Typography align="center" fontWeight={600} fontFamily="Montserrat" sx={{ lineHeight: 0.5, fontSize: {lg:18, md:14, sm:10, xs:6} }}>200%</Typography>
-            <Typography align="center" textTransform="uppercase" fontWeight={600} fontFamily="Montserrat" sx={{ fontSize:{lg:12, md:9, sm:6, xs:3} }}>
+            <Typography align="center" fontWeight={600} fontFamily="'Montserrat', sans-serif" sx={{ lineHeight: 0.5, fontSize: {lg:18, md:14, sm:10, xs:6} }}>200%</Typography>
+            <Typography align="center" textTransform="uppercase" fontWeight={600} fontFamily="'Montserrat', sans-serif" sx={{ fontSize:{lg:12, md:9, sm:6, xs:3} }}>
               Current XP
             </Typography>
           </Stack>
@@ -98,10 +98,10 @@ export default function Header() {
           </Grid>
 
           <Stack sx={{ color: 'white', width: '5%' }}>
-            <Typography align="center" fontWeight={600} fontFamily="Montserrat" sx={{ lineHeight: 0.5, fontSize: { lg:18, md:14, sm:10, xs:6 } }}>
+            <Typography align="center" fontWeight={600} fontFamily="'Montserrat', sans-serif" sx={{ lineHeight: 0.5, fontSize: { lg:18, md:14, sm:10, xs:6 } }}>
               250%
             </Typography>
-            <Typography align="center" textTransform="uppercase" fontWeight={600} fontFamily="Montserrat" sx={{ fontSize: {lg:12, md:9, sm:6, xs:3} }}>
+            <Typography align="center" textTransform="uppercase" fontWeight={600} fontFamily="'Montserrat', sans-serif" sx={{ fontSize: {lg:12, md:9, sm:6, xs:3} }}>
               Bonus XP
             </Typography>
           </Stack>
@@ -130,8 +130,8 @@ export default function Header() {
           </Grid>
 
           <Stack sx={{ color: 'white', width: '6%' }}>
-            <Typography align="center" fontWeight={600} fontFamily="Montserrat" sx={{ lineHeight: 0.5, fontSize: { lg:18, md:14, sm:10, xs:6 } }}>5</Typography>
-            <Typography align="center" textTransform="uppercase" fontWeight={600} fontFamily="Montserrat" sx={{ fontSize: { lg:12, md:9, sm:6, xs:3 } }}>Streak</Typography>
+            <Typography align="center" fontWeight={600} fontFamily="'Montserrat', sans-serif" sx={{ lineHeight: 0.5, fontSize: { lg:18, md:14, sm:10, xs:6 } }}>5</Typography>
+            <Typography align="center" textTransform="uppercase" fontWeight={600} fontFamily="'Montserrat', sans-serif" sx={{ fontSize: { lg:12, md:9, sm:6, xs:3 } }}>Streak</Typography>
           </Stack>
         </Stack>
       </Stack>

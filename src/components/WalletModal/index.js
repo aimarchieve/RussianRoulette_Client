@@ -164,7 +164,7 @@ export default function WalletModal() {
       maxWidth="sm"
     >
       <DialogTitle id="responsive-dialog-title" onClose={closeAndSetDefault}>
-        <Typography fontSize={18} fontWeight={600} fontFamily="Montserrat" textTransform="uppercase" >
+        <Typography fontSize={18} fontWeight={600} fontFamily="'Montserrat', sans-serif" textTransform="uppercase" >
           Wallet
         </Typography>
       </DialogTitle>

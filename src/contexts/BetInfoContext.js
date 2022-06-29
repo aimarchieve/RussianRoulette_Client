@@ -2,8 +2,6 @@ import React, { createContext, useReducer } from 'react';
 import { useContext } from 'react';
 import { GameInfoContext } from './GameInfoContext';
 
-// ----------------------------------------------------------------------
-
 const initialState = {
   modalIsOpened: false,
   currentTab: 'security',

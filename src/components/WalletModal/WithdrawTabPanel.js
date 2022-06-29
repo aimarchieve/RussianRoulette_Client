@@ -98,7 +98,7 @@ export default function WithdrawTabPanel() {
           error={formik.touched.btcAddress && Boolean(formik.errors.btcAddress)}
           helperText={
             formik.touched.btcAddress && formik.errors.btcAddress ? (
-              <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+              <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
                 <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
                 {formik.touched.btcAddress && formik.errors.btcAddress}
               </Typography>) : (<></>)
@@ -115,7 +115,7 @@ export default function WithdrawTabPanel() {
           error={formik.touched.amount && Boolean(formik.errors.amount)}
           helperText={
             formik.touched.amount && formik.errors.amount ? (
-              <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+              <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
                 <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
                 {formik.touched.amount && formik.errors.amount}
               </Typography>) : (<></>)
@@ -127,7 +127,7 @@ export default function WithdrawTabPanel() {
       </Stack>
 
       <Stack spacing={2}>
-        <Typography fontSize={12} fontWeight={700} fontFamily="Montserrat" textAlign="center">
+        <Typography fontSize={12} fontWeight={700} fontFamily="'Montserrat', sans-serif" textAlign="center">
           Minimum withdrawal is 0.00050000
           <MuiIcon className="text-yellow" sx={{ fontSize: 14 }}><Icon icon="bi:currency-bitcoin" /></MuiIcon>. 
           Your withdrawal will have 0.00007000
@@ -136,7 +136,7 @@ export default function WithdrawTabPanel() {
         </Typography>
         <Divider />
         <Stack px={3} spacing={2}>
-          <Typography fontSize={12} fontWeight={700} fontFamily="Montserrat" textAlign="center">
+          <Typography fontSize={12} fontWeight={700} fontFamily="'Montserrat', sans-serif" textAlign="center">
             Improve your account security with Two-Factor Authentication
           </Typography>
           <EnableButton variant="outlined">

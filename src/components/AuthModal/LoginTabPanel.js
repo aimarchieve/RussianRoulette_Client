@@ -109,7 +109,7 @@ export default function LoginTabPanel() {
         error={formik.touched.username && Boolean(formik.errors.username)}
         helperText={
           formik.touched.username && formik.errors.username ? (
-            <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+            <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
               <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
               {formik.touched.username && formik.errors.username}
             </Typography>) : (<></>)
@@ -125,7 +125,7 @@ export default function LoginTabPanel() {
         error={formik.touched.password && Boolean(formik.errors.password)}
         helperText={
           formik.touched.password && formik.errors.password ? (
-            <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+            <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
               <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
               {formik.touched.password && formik.errors.password}
             </Typography>) : (<></>)
@@ -137,7 +137,7 @@ export default function LoginTabPanel() {
         PLAY NOW
       </LoginButton>
 
-      <Typography fontFamily="Montserrat" textAlign="center" fontSize={14} fontWeight={700}>OR</Typography>
+      <Typography fontFamily="'Montserrat', sans-serif" textAlign="center" fontSize={14} fontWeight={700}>OR</Typography>
 
       <Stack direction="row" spacing={0.5} justifyContent="space-between">
         <SocialButton sx={{ fontSize: 24, width: '50%' }}>
@@ -156,10 +156,10 @@ export default function LoginTabPanel() {
           marginTop: "24px!important"
         }}
       >
-        <Typography fontFamily="Montserrat" textAlign="center" color="#f8bf60" fontSize={14} fontWeight={700}>
+        <Typography fontFamily="'Montserrat', sans-serif" textAlign="center" color="#f8bf60" fontSize={14} fontWeight={700}>
           Forgot Password?
         </Typography>
-        <Typography fontFamily="Montserrat" textAlign="center" color="#f8bf60" fontSize={14} fontWeight={700}>
+        <Typography fontFamily="'Montserrat', sans-serif" textAlign="center" color="#f8bf60" fontSize={14} fontWeight={700}>
           Create an Account?
         </Typography>
       </Stack>

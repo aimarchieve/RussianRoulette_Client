@@ -26,7 +26,9 @@ import AccountModal from './AccountModal';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { useDispatch, useSelector } from '../redux/store';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGem } from "@fortawesome/free-solid-svg-icons";
+import './topbar.css';
 /* ---------------------------------------------------------------------------------------------------- */
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
@@ -64,7 +66,7 @@ const RegisterButton = styled(MuiButton)(({ theme }) => ({
 
 const WalletButton = styled(MuiButton)(({ theme }) => ({
   backgroundColor: '#f8bf60',
-  boxShadow: {md:'0 6px 0 #997a49', xs: 'none'},
+  boxShadow: { md: '0 6px 0 #997a49', xs: 'none' },
   color: '#000000',
   padding: 0,
   minWidth: { lg: 84, md: 75, sm: 60, xs: 45 },
@@ -161,7 +163,7 @@ export default function TopBar(props) {
   }, [currentUser?.balance]);
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className="one-edge-box-2" >
       <Box maxWidth="2xl" mx={1}>
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           <Stack direction="row" width="100%">
@@ -171,7 +173,7 @@ export default function TopBar(props) {
               component="div"
               sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
             >
-              <Box component="img" alt="logo" src="/assets/images/logo.png" />
+              <Box component="img" alt="logo" src="/assets/images/logo.png" sx={{ width: '90%', height: '90%' }} />
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -259,8 +261,16 @@ export default function TopBar(props) {
                         InputProps={{
                           endAdornment: <InputAdornment position="end">
                             <Stack direction="row" alignItems="center" display="flex" spacingnpm={1}>
-                              <MuiIcon className="text-yellow" sx={{ display: 'flex', fontSize: { xs: 18, sm: 18, md: 20, lg: 25 } }}><Icon icon="ic:baseline-diamond" /></MuiIcon>
-                              <MuiIcon sx={{ fontSize: { display: 'flex', xs: 12, sm: 12, md: 14, lg: 16 } }}><Icon icon="iwwa:arrow-down" /></MuiIcon>
+                              <MuiIcon className="text-yellow"
+                                sx={{ display: 'flex', fontSize: { xs: 12, sm: 14, md: 16, lg: 18 }, paddingRight: '5px' }}
+                              >
+                                <FontAwesomeIcon icon={faGem} />
+                              </MuiIcon>
+                              <MuiIcon
+                                sx={{ fontSize: { display: 'flex', xs: 12, sm: 12, md: 14, lg: 16 } }}
+                              >
+                                <Icon icon="iwwa:arrow-down" />
+                              </MuiIcon>
                             </Stack>
                           </InputAdornment>
                         }}
@@ -269,11 +279,11 @@ export default function TopBar(props) {
                         <Typography
                           sx={{ display: { xs: 'flex', md: 'none' } }}
                         >
-                          <Icon icon="fa-solid:wallet" width="14" color="#000" />
+                          <Icon icon="fa-solid:wallet" width="12" color="#000" />
                         </Typography>
                         <Typography
-                          sx={{ fontSize: { xs: 12, sm: 12, md: 14, lg: 16 }, display: { xs:'none', md: 'flex' } }}
-                          fontFamily="Montserrat"
+                          sx={{ fontSize: { xs: 12, sm: 12, md: 14, lg: 16 }, display: { xs: 'none', md: 'flex' }, paddingLeft: '10px', paddingRight: '10px' }}
+                          fontFamily="'Montserrat', sans-serif"
                           fontWeight={700}
                         >
                           Wallet
@@ -299,29 +309,36 @@ export default function TopBar(props) {
             }
           </Stack>
           <Stack sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
-            <Box ml={2} sx={{ flexGrow: 0, mr: { xs: 1, sm: 1, md: 3, lg: 3 } }}>
-              <IconButton onClick={handleClick} sx={{ p: 0, fontSize: { xs: 20, sm: 20, md: 25, lg: 30 } }}>
-                <Icon icon="mdi:account" />
-              </IconButton>
-              <Menu
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                  'aria-labelledby': 'basic-button',
-                }}
-              >
-                <MenuItem onClick={handleAccountModal}>Account</MenuItem>
-                <MenuItem onClick={handleAffiliateModal}>Affiliate</MenuItem>
-              </Menu>
-            </Box>
+            {
+              currentUser ?
+                <Box ml={2} sx={{ flexGrow: 0, mr: { xs: 1, sm: 1, md: 3, lg: 3 } }}>
+                  <IconButton onClick={handleClick} sx={{ p: 0, fontSize: { xs: 20, sm: 20, md: 25, lg: 30 } }}>
+                    <Icon icon="mdi:account" />
+                  </IconButton>
+                  <Menu
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
+                    }}
+                  >
+                    <MenuItem onClick={handleAccountModal}>Account</MenuItem>
+                    <MenuItem onClick={handleAffiliateModal}>Affiliate</MenuItem>
+                  </Menu>
+                </Box>
+                :
+                ''
+
+            }
+
             {
               props.chat ?
                 ''
                 :
                 <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
                   <IconButton sx={{ p: 0, fontSize: 25, color: 'gray' }}>
-                    <Icon onClick={() => props.setChat(true)} icon="dashicons:arrow-right-alt2" />
+                    <Icon onClick={() => props.setChat(true)} icon="dashicons:arrow-left-alt2" />
                   </IconButton>
                 </Box>
             }

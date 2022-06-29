@@ -43,7 +43,7 @@ export default function DepositTabPanel() {
     <Stack spacing={3}>
       <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={0.5}>
         <Box width="95%" className="bg-dark" sx={{ py: 1, borderRadius: '3px 0px 0px 3px' }}>
-          <Typography fontSize={12} fontWeight={600} fontFamily="Montserrat" textAlign="center">
+          <Typography fontSize={12} fontWeight={600} fontFamily="'Montserrat', sans-serif" textAlign="center">
             13U9EdgSWNfto7maMzsWXit2a99CmhcyXZ
             {/* { generatedAddress } */}
           </Typography>
@@ -58,7 +58,7 @@ export default function DepositTabPanel() {
       </Stack>
 
       <Stack direction="row" justifyContent="center">
-        <Typography fontSize={12} fontWeight={600} fontFamily="Montserrat" textAlign="center" width="80%">
+        <Typography fontSize={12} fontWeight={600} fontFamily="'Montserrat', sans-serif" textAlign="center" width="80%">
           Only send BTC to this address, 1 confirmation required.<br />
           A new deposit address is generated for each deposit for you privacy
           (all old deposit addresses will still credit to your account as normal).
@@ -67,7 +67,7 @@ export default function DepositTabPanel() {
 
       <Divider />
 
-      <Typography fontSize={12} fontWeight={600} fontFamily="Montserrat" textAlign="center">
+      <Typography fontSize={12} fontWeight={600} fontFamily="'Montserrat', sans-serif" textAlign="center">
         Improve your account security with Two-Factor Authentication
       </Typography>
 

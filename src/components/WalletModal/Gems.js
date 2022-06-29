@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Box,
     Stack,
     Typography,
     styled,
-    Button as MuiButton,
     Divider,
     Slider as MuiSlider,
     TextField as MuiTextField 
@@ -29,44 +28,54 @@ const Slider = styled(MuiSlider)(({ theme }) => ({
     width: '94%',
     marginRight: '25px',
     '& .MuiSlider-rail': {
-        color: '#1b2026',
-        boxShadow: '0 5px 0 #21262c',
+        // color: '#1b2026',
+        color: '#000000',
+        // boxShadow: '0 5px 0 #21262c',
         height: '6px',
     },
     '& .MuiSlider-track': {
         height: '4px',
         color: '#f8bf60',
-        boxShadow: '0 4px 0 #a6824a',
+        // boxShadow: '0 4px 0 #a6824a',
     },
     '& .MuiSlider-thumbColorPrimary': {
         border: 'none',
         outline: 'none',
         background: '#f8bf60',
         borderRadius: '2px',
-        width: '30px',
-        height: '10px',
-        boxShadow: '0 4px 0 #a6824a'
+        width: '44px',
+        height: '22px',
+        // boxShadow: '0 4px 0 #a6824a'
     },
     '& .MuiSlider-mark': {
         border: 'none',
         outline: 'none',
-        background: '#1b2026',
-        borderRadius: '2px',
-        width: '5%',
-        height: '8px',
-        boxShadow: '0 4px 0 #22272d',
-        borderLeft: '2px solid #2c3137',
-        borderRight: '2px solid #2c3137',
+        // background: '#1b2026',
+        background: '#000000',
+        opacity: 0.6,
+        // borderRadius: '2px',
+        width: '6.5%',
+        height: '15px',
+        // boxShadow: '0 4px 0 #22272d',
+        borderTop: '1px solid #2c3137',
+        borderBottom: '1px solid #2c3137',
+        borderLeft: '3px solid #2c3137',
+        borderRight: '3px solid #2c3137',
     },
     '& .MuiSlider-markActive': {
         border: 'none',
+        opacity: 1,
         outline: 'none',
-        width: '5%',
-        height: '8px',
+        width: '6.5%',
+        height: '15px',
         background: '#f8bf60',
-        boxShadow: '0 4px 0 #a6824a',
-        borderLeft: '2px solid #a6824a',
-        borderRight: '2px solid #a6824a'
+        borderTop: '1px solid #2c3137',
+        borderBottom: '1px solid #2c3137',
+        borderLeft: '3px solid #2c3137',
+        borderRight: '3px solid #2c3137',
+        // boxShadow: '0 4px 0 #a6824a',
+        // borderLeft: '2px solid #a6824a',
+        // borderRight: '2px solid #a6824a'
     }
 }));
 
@@ -131,7 +140,9 @@ export default function Gems() {
     const [ stake, setStake ] = useState(0);
     const [ receiveAmount, setReceiveAmount ] = useState(0);
     const [ type, setType ] = useState("Staking");
-    const { modalIsOpened, closeWalletModal } = useWallet();
+    const { closeWalletModal } = useWallet();
+    const { balance } = useSelector((state) => state.game);
+    const [ userBalance, setUserBalance ] = useState(currentUser?.balance || 1);
 
     const openBondPanel = () => {
         setBond(true);
@@ -154,6 +165,12 @@ export default function Gems() {
             dispatch(addStaking(currentUser.username, stake, receiveAmount, type, currentUser._id, currentUser.balance));
         }
     }
+
+    useEffect(() => {
+        if(balance){
+          setUserBalance(balance);
+        }
+    }, [balance]);
 
     return (
         <Stack spacing={3}>
@@ -227,12 +244,13 @@ export default function Gems() {
                         <Box>
                             <Stack direction="row" justifyContent="center" mb={2}>
                                 <Slider
-                                    defaultValue={0}
+                                    value={stake}
                                     valueLabelDisplay="auto"
-                                    step={25}
+                                    step={userBalance / 4}
                                     marks
                                     min={0}
-                                    max={100}
+                                    max={userBalance}
+                                    onChange={(e) => setStake(e.target.value)}
                                 />
                             </Stack>
                         </Box>

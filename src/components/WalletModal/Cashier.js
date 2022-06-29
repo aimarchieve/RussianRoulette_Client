@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Box,
     Stack,
@@ -6,7 +6,10 @@ import {
     styled,
     Button as MuiButton,
     Divider,
-    Slider as MuiSlider
+    Slider as MuiSlider,
+    InputAdornment,
+    Icon as MuiIcon,
+    TextField as MuiTextField
 } from '@mui/material';
 import { Icon } from '@iconify/react';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
@@ -17,49 +20,110 @@ import Button from '@mui/material/Button';
 import TabsListUnstyled from '@mui/base/TabsListUnstyled';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
+import { useDispatch, useSelector } from '../../redux/store';
+import useAuth from '../../hooks/useAuth';
+import useWallet from '../../hooks/useWallet';
 /* ---------------------------------------------------------------------------------------------------- */
 const Slider = styled(MuiSlider)(({ theme }) => ({
     width: '94%',
     marginRight: '25px',
     '& .MuiSlider-rail': {
-        color: '#1b2026',
-        boxShadow: '0 5px 0 #21262c',
+        color: '#000000',
         height: '6px',
     },
     '& .MuiSlider-track': {
         height: '4px',
         color: '#f8bf60',
-        boxShadow: '0 4px 0 #a6824a',
     },
     '& .MuiSlider-thumbColorPrimary': {
         border: 'none',
         outline: 'none',
         background: '#f8bf60',
         borderRadius: '2px',
-        width: '30px',
-        height: '10px',
-        boxShadow: '0 4px 0 #a6824a'
+        width: '44px',
+        height: '22px',
     },
     '& .MuiSlider-mark': {
         border: 'none',
         outline: 'none',
-        background: '#1b2026',
-        borderRadius: '2px',
-        width: '5%',
-        height: '8px',
-        boxShadow: '0 4px 0 #22272d',
-        borderLeft: '2px solid #2c3137',
-        borderRight: '2px solid #2c3137',
+        background: '#000000',
+        opacity: 0.6,
+        width: '6.5%',
+        height: '15px',
+        borderTop: '1px solid #2c3137',
+        borderBottom: '1px solid #2c3137',
+        borderLeft: '3px solid #2c3137',
+        borderRight: '3px solid #2c3137',
     },
     '& .MuiSlider-markActive': {
         border: 'none',
+        opacity: 1,
         outline: 'none',
-        width: '5%',
-        height: '8px',
+        width: '6.5%',
+        height: '15px',
         background: '#f8bf60',
-        boxShadow: '0 4px 0 #a6824a',
-        borderLeft: '2px solid #a6824a',
-        borderRight: '2px solid #a6824a'
+        borderTop: '1px solid #2c3137',
+        borderBottom: '1px solid #2c3137',
+        borderLeft: '3px solid #2c3137',
+        borderRight: '3px solid #2c3137',
+    }
+}));
+
+const TextField = styled(MuiTextField)(({ theme }) => ({
+    backgroundColor: '#191e24',
+    display: 'flex',
+    marginBottom: '10px',
+    borderColor: '#191e24',
+    textAlign: 'center',
+    '& .css-14t01uy-MuiInputBase-root-MuiOutlinedInput-root': {
+        fontSize: '14px',
+        fontFamily: 'Montserrat',
+        textAlign: 'center',
+        color: '#ffffff',
+        fontWeight: '700',
+        borderColor: '#191e24',
+    },
+    '& .css-p51h6s-MuiInputBase-input-MuiOutlinedInput-input': {
+        padding: '15px 15px',
+        textAlign: 'center',
+        color: '#ffffff',
+        fontWeight: '700',
+        borderColor: '#191e24',
+    },
+    '& .css-1yl10x9-MuiFormLabel-root-MuiInputLabel-root': {
+        fontSize: '14px',
+        lineHeight: 2,
+        textAlign: 'center',
+        color: '#ffffff',
+        fontWeight: '700',
+        borderColor: '#191e24',
+    },
+    '& .css-rb5gc9-MuiFormLabel-root-MuiInputLabel-root': {
+        fontSize: '14px',
+        fontWeight: '700',
+        fontFamily: 'Montserrat',
+        textAlign: 'center',
+        color: '#ffffff',
+        borderColor: '#191e24',
+    },
+    '&, .css-1yl10x9-MuiFormLabel-root-MuiInputLabel-root.Mui-focused': {
+        color: '#ffffff',
+        fontWeight: '700',
+        borderColor: '#191e24',
+    },
+    '& .css-14t01uy-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+        borderColor: '#f8bf60',
+        borderWidth: '2px'
+    },
+    '& .css-p51h6s-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill': {
+        WebkitBoxShadow: '0 0 0 100px #191e24 inset'
+    },
+    '& .css-xzkq1u-MuiFormHelperText-root': {
+        marginLeft: 0,
+        marginRight: 0
+    },
+    '& .css-1s1h6d-MuiTypography-root': {
+        fontSize: '1rem',
     }
 }));
 
@@ -105,8 +169,14 @@ const TabsList = styled(TabsListUnstyled)`
 /* ---------------------------------------------------------------------------------------------------- */
 
 export default function Cashier() {
+    const dispatch = useDispatch();
+    const { currentUser } = useAuth();
+    const { balance } = useSelector((state) => state.game);
+    const [userBalance, setUserBalance] = useState(currentUser?.balance || 1);
     const [depositPanel, setDepositPanel] = useState(true);
     const [withdrawPanel, setWithdrawPanel] = useState(false);
+    const [btcAddress, setBtcAddress] = useState('');
+    const [withdrawAmount, setWithdrawAmount] = useState(0);
 
     const openDepositPanel = () => {
         setDepositPanel(true);
@@ -117,6 +187,12 @@ export default function Cashier() {
         setDepositPanel(false);
         setWithdrawPanel(true);
     }
+
+    useEffect(() => {
+        if (balance) {
+            setUserBalance(balance);
+        }
+    }, [balance]);
 
     return (
         <Stack spacing={3}>
@@ -220,59 +296,53 @@ export default function Cashier() {
                                 </Typography>
                             </Button>
                         </Box>
-                        <Box
-                            backgroundColor="#191e24"
-                            p={2}
-                            borderRadius={1}
-                            sx={{ display: 'flex', direction: 'row', justifyContent: 'space-between' }}
-                        >
-                            <Typography
-                                fontSize={12}
-                                fontWeight={700}
-                            >
-                                BTC Address
-                            </Typography>
-                            <Typography
-                                fontSize={13}
-                                fontWeight={900}
-                                textTransform="uppercase"
-                            >
-                                st5uh5coun5vmf3yhzijkz2jovaf4m71
-                            </Typography>
-                            <CurrencyBitcoinIcon sx={{ fontSize: 15, fontWeight: 900 }} className='text-yellow' />
-                        </Box>
-                        <Box
-                            mt={1}
-                            mb={1}
-                            backgroundColor="#191e24"
-                            p={2}
-                            borderRadius={1}
-                            sx={{ display: 'flex', direction: 'row', justifyContent: 'space-between' }}
-                        >
-                            <Typography
-                                fontSize={12}
-                                fontWeight={700}
-                            >
-                                Amount
-                            </Typography>
-                            <Typography
-                                fontSize={13}
-                                fontWeight={900}
-                                textTransform="uppercase"
-                            >
-                                17,000.00
-                            </Typography>
-                            <CurrencyBitcoinIcon sx={{ fontSize: 15, fontWeight: 900 }} className='text-yellow' />
-                        </Box>
+                        <TextField
+                            name="btcAddress"
+                            // label="BTC Address"
+                            label={
+                                <Typography
+                                    fontFamily="'Montserrat', sans-serif"
+                                    fontWeight={700}
+                                    sx={{ display: 'flex', alignItems: 'center', direction: 'row' }}
+                                >
+                                    <CurrencyBitcoinIcon sx={{ fontSize: 20, fontWeight: 700 }} className='text-yellow' />
+                                    BTC Address
+                                </Typography>
+                            }
+                            value={btcAddress}
+                            onChange={(e) => setBtcAddress(e.target.value)}
+                            fullWidth
+                            fontWeight={700}
+                            fontFamily="'Montserrat', sans-serif"
+                        />
+                        <TextField
+                            name="withdrawAmount"
+                            label={
+                                <Typography
+                                    fontFamily="'Montserrat', sans-serif"
+                                    fontWeight={700}
+                                    sx={{ display: 'flex', alignItems: 'center', direction: 'row' }}
+                                >
+                                    <CurrencyBitcoinIcon sx={{ fontSize: 20, fontWeight: 700 }} className='text-yellow' />
+                                    Amount
+                                </Typography>
+                            }
+                            value={withdrawAmount}
+                            onChange={(e) => setWithdrawAmount(e.target.value)}
+                            fullWidth
+                            fontFamily="'Montserrat', sans-serif"
+                            fontWeight={700}
+                        />
                         <Box>
                             <Stack direction="row" justifyContent="center" mb={2}>
                                 <Slider
-                                    defaultValue={0}
+                                    value={withdrawAmount}
                                     valueLabelDisplay="auto"
-                                    step={25}
+                                    step={userBalance / 4}
                                     marks
                                     min={0}
-                                    max={100}
+                                    max={userBalance}
+                                    onChange={(e) => setWithdrawAmount(e.target.value)}
                                 />
                             </Stack>
                         </Box>

@@ -102,7 +102,7 @@ export default function SecurityTabPanel() {
   return (
     <Stack spacing={3}>
       <Box>
-        <Typography fontSize={12} fontWeight={700} fontFamily="Montserrat">Password</Typography>
+        <Typography fontSize={12} fontWeight={700} fontFamily="'Montserrat', sans-serif">Password</Typography>
         <Grid container spacing={1} mt={1}>
           <Grid item md={12}>
             <TextField
@@ -114,7 +114,7 @@ export default function SecurityTabPanel() {
               error={passwordFormik.touched.currentPassword && Boolean(passwordFormik.errors.currentPassword)}
               helperText={
                 passwordFormik.touched.currentPassword && passwordFormik.errors.currentPassword ? (
-                  <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+                  <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
                     <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
                     {passwordFormik.touched.currentPassword && passwordFormik.errors.currentPassword}
                   </Typography>) : (<></>)
@@ -132,7 +132,7 @@ export default function SecurityTabPanel() {
               error={passwordFormik.touched.newPassword && Boolean(passwordFormik.errors.newPassword)}
               helperText={
                 passwordFormik.touched.newPassword && passwordFormik.errors.newPassword ? (
-                  <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+                  <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
                     <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
                     {passwordFormik.touched.newPassword && passwordFormik.errors.newPassword}
                   </Typography>) : (<></>)
@@ -150,7 +150,7 @@ export default function SecurityTabPanel() {
               error={passwordFormik.touched.confirmPassword && Boolean(passwordFormik.errors.confirmPassword)}
               helperText={
                 passwordFormik.touched.confirmPassword && passwordFormik.errors.confirmPassword ? (
-                  <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+                  <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
                     <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
                     {passwordFormik.touched.confirmPassword && passwordFormik.errors.confirmPassword}
                   </Typography>) : (<></>)
@@ -168,7 +168,7 @@ export default function SecurityTabPanel() {
       <Divider />
 
       <Box>
-        <Typography fontSize={12} fontWeight={700} fontFamily="Montserrat">Email</Typography>
+        <Typography fontSize={12} fontWeight={700} fontFamily="'Montserrat', sans-serif">Email</Typography>
         <Grid container spacing={1} mt={1}>
           <Grid item md={12}>
             <TextField
@@ -180,7 +180,7 @@ export default function SecurityTabPanel() {
               error={emailFormik.touched.currentEmail && Boolean(emailFormik.errors.currentEmail)}
               helperText={
                 emailFormik.touched.currentEmail && emailFormik.errors.currentEmail ? (
-                  <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+                  <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
                     <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
                     {emailFormik.touched.currentEmail && emailFormik.errors.currentEmail}
                   </Typography>) : (<></>)
@@ -198,7 +198,7 @@ export default function SecurityTabPanel() {
               error={emailFormik.touched.newEmail && Boolean(emailFormik.errors.newEmail)}
               helperText={
                 emailFormik.touched.newEmail && emailFormik.errors.newEmail ? (
-                  <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+                  <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
                     <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
                     {emailFormik.touched.newEmail && emailFormik.errors.newEmail}
                   </Typography>) : (<></>)
@@ -216,7 +216,7 @@ export default function SecurityTabPanel() {
               error={emailFormik.touched.confirmEmail && Boolean(emailFormik.errors.confirmEmail)}
               helperText={
                 emailFormik.touched.confirmEmail && emailFormik.errors.confirmEmail ? (
-                  <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+                  <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
                     <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
                     {emailFormik.touched.confirmEmail && emailFormik.errors.confirmEmail}
                   </Typography>) : (<></>)

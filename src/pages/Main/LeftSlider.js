@@ -10,16 +10,11 @@ import {
   Icon as MuiIcon,
   TextField as MuiTextField
 } from '@mui/material';
-import DiamondIcon from '@mui/icons-material/Diamond';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { Icon } from '@iconify/react';
 import { useDispatch, useSelector } from '../../redux/store';
 import useAuth from '../../hooks/useAuth';
-
-
-
-
-// import TextField from '@mui/material/TextField';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGem } from "@fortawesome/free-solid-svg-icons";
 
 const Box = styled(MuiBox)(({ theme }) => ({
   backgroundColor: '#1c2127',
@@ -28,46 +23,47 @@ const Box = styled(MuiBox)(({ theme }) => ({
 const Slider = styled(MuiSlider)(({ theme }) => ({
   width: '90%',
   marginRight: '10px',
+  paddingTop: '3px !important',
   '& .MuiSlider-rail': {
-    color: '#1b2026',
-    boxShadow: '0 5px 0 #21262c',
+    color: '#000000',
     height: '6px',
-  },
-  '& .MuiSlider-track': {
+},
+'& .MuiSlider-track': {
     height: '4px',
     color: '#f8bf60',
-    boxShadow: '0 4px 0 #a6824a',
-  },
-  '& .MuiSlider-thumbColorPrimary': {
+},
+'& .MuiSlider-thumbColorPrimary': {
     border: 'none',
     outline: 'none',
     background: '#f8bf60',
     borderRadius: '2px',
-    width: '30px',
-    height: '10px',
-    boxShadow: '0 4px 0 #a6824a'
-  },
-  '& .MuiSlider-mark': {
+    width: '44px',
+    height: '22px',
+},
+'& .MuiSlider-mark': {
     border: 'none',
     outline: 'none',
-    background: '#1b2026',
-    borderRadius: '2px',
-    width: '5%',
-    height: '8px',
-    boxShadow: '0 4px 0 #22272d',
-    borderLeft: '2px solid #2c3137',
-    borderRight: '2px solid #2c3137',
-  },
-  '& .MuiSlider-markActive': {
+    background: '#000000',
+    opacity: 0.6,
+    width: '6.5%',
+    height: '15px',
+    borderTop: '1px solid #2c3137',
+    borderBottom: '1px solid #2c3137',
+    borderLeft: '3px solid #2c3137',
+    borderRight: '3px solid #2c3137',
+},
+'& .MuiSlider-markActive': {
     border: 'none',
+    opacity: 1,
     outline: 'none',
-    width: '5%',
-    height: '8px',
+    width: '6.5%',
+    height: '15px',
     background: '#f8bf60',
-    boxShadow: '0 4px 0 #a6824a',
-    borderLeft: '2px solid #a6824a',
-    borderRight: '2px solid #a6824a'
-  }
+    borderTop: '1px solid #2c3137',
+    borderBottom: '1px solid #2c3137',
+    borderLeft: '3px solid #2c3137',
+    borderRight: '3px solid #2c3137',
+}
 }));
 
 const TextField = styled(MuiTextField)(({ theme }) => ({
@@ -87,30 +83,30 @@ export default function LeftSlider({ wagered, setWagered }) {
   const { currentUser } = useAuth();
   const dispatch = useDispatch();
   const { balance } = useSelector((state) => state.game);
-  const [ userBalance, setUserBalance ] = useState(currentUser?.balance ||1);
+  const [userBalance, setUserBalance] = useState(currentUser?.balance || 1);
   useEffect(() => {
-    if(balance){
+    if (balance) {
       setUserBalance(balance);
     }
   }, [balance]);
 
   useEffect(() => {
-    if(currentUser){
+    if (currentUser) {
       setUserBalance(currentUser.balance);
     }
   }, [currentUser?.balance]);
 
   return (
-    <Stack className="bg-dark" px={0.25} py={0.5} borderRadius={1} spacing={0.5}>
-      <Box bgcolor="black" borderRadius={1}>
+    <Stack className="bg-dark" px={0.5} py={1} borderRadius={1} spacing={0.5}>
+      <Box bgcolor="black" borderRadius={1} mb={0.6}>
         <Typography
           className="text-yellow"
-          sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize:{lg:14, md:12, sm:10, xs:8} }}
+          sx={{ display: 'flex', paddingTop: '1px', paddingBottom: '1px', alignItems: 'center', justifyContent: 'center', fontSize: { lg: 14, md: 12, sm: 10, xs: 8 } }}
           fontWeight={700}
-          fontFamily="Montserrat"
+          fontFamily="'Montserrat', sans-serif"
           textTransform="uppercase"
         >
-          <DiamondIcon sx={{ fontSize: {lg:14, md:12, sm:10, xs:10} }} /> 5.00 Profile on win
+          <FontAwesomeIcon icon={faGem} className="text-yellow" style={{ paddingRight: '5px' }} /> 5.00 Profile on win
         </Typography>
       </Box>
 
@@ -121,9 +117,9 @@ export default function LeftSlider({ wagered, setWagered }) {
               <Stack direction="row" justifyContent="space-between" alignItems="center">
                 <Typography
                   color="white"
-                  sx={{ display: 'flex', alignItems: 'center', fontSize: {lg:14, md:12, sm:10, xs:10} }}
+                  sx={{ display: 'flex', alignItems: 'center', fontSize: { lg: 14, md: 12, sm: 10, xs: 10 } }}
                   fontWeight={700}
-                  fontFamily="Montserrat"
+                  fontFamily="'Montserrat', sans-serif"
                   pl={1}
                 >Bet <ArrowDropDownIcon sx={{ fontSize: 16 }} /></Typography>
                 <TextField
@@ -134,7 +130,9 @@ export default function LeftSlider({ wagered, setWagered }) {
                   InputProps={{
                     endAdornment: <InputAdornment position="end">
                       <Stack direction="row" alignItems="center" spacingnpm={1}>
-                        <MuiIcon className="text-yellow" sx={{ fontSize: {lg:20, md:18, sm:16, xs:14} }}><Icon icon="ic:baseline-diamond" /></MuiIcon>
+                        <MuiIcon className="text-yellow" sx={{ display: 'flex', paddingRight: '2px', fontSize: { lg: 14, md: 12, sm: 10, xs: 8 } }}>
+                          <FontAwesomeIcon icon={faGem} className="text-yellow" />
+                        </MuiIcon>
                       </Stack>
                     </InputAdornment>
                   }}
@@ -151,7 +149,7 @@ export default function LeftSlider({ wagered, setWagered }) {
                   fontWeight={800}
                   textAlign="center"
                 >
-                  <Typography variant="span" sx={{ fontSize: {lg:14, md:12, sm:10, xs:10} }} fontFamily="Montserrat">
+                  <Typography variant="span" sx={{ fontSize: { lg: 14, md: 12, sm: 10, xs: 10 } }} fontFamily="'Montserrat', sans-serif">
                     1/2
                   </Typography>
                 </Typography>
@@ -167,7 +165,7 @@ export default function LeftSlider({ wagered, setWagered }) {
                   fontWeight={800}
                   textAlign="center"
                 >
-                  <Typography variant="span" sx={{ fontSize:{ lg:14, md:12, sm:10, xs:10 } }} fontFamily="Montserrat">
+                  <Typography variant="span" sx={{ fontSize: { lg: 14, md: 12, sm: 10, xs: 10 } }} fontFamily="'Montserrat', sans-serif">
                     x2
                   </Typography>
                 </Typography>

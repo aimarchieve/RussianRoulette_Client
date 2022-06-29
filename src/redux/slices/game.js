@@ -11,6 +11,7 @@ const initialState = {
   randomNumbers: [],
   result: null,
   balance: 0,
+  gameInfo: [],
 };
 
 const slice = createSlice({
@@ -41,9 +42,12 @@ const slice = createSlice({
     getBalance(state, action) {
       state.isLoading = false;
       state.balance = action.payload;
-    }
+    },
 
-
+    getGameInfomation(state, action) {
+      state.isLoading = false;
+      state.gameInfo = action.payload;
+    },
   }
 });
 
@@ -85,3 +89,15 @@ export function addNewGame(wagered, payout, username, game, type, _id) {
 
 // ----------------------------------------------------------------------
 
+export function getGameInfo() {
+  return async (dispatch) => {
+    dispatch(slice.actions.startLoading());
+    try{
+      const response = await api.get('/gameInfo/getAllGameInfo');
+      dispatch(slice.actions.getGameInfomation(response.data));
+    } catch(error) {
+      console.log("get All Game Info Error => " ,error);
+      dispatch(slice.actions.hasError(error));
+    }
+  }
+}

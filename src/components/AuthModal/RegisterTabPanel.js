@@ -91,20 +91,18 @@ const validSchema = yup.object().shape({
 export default function RegisterTabPanel() {
   const { signin, signup } = useAuth();
   const dispatch = useDispatch();
-
+  const { generatedAddress } = useSelector((state) => state.getAddress);
   const handleSubmit = (values) => {
     const { username, email, password, role, level, balance } = values;
     signup({ username, email, password, role, level, balance });
   };
-  const walletId = "62b0bc02d2c7f800070289b6";
-  const blockchain = "bitcoin";
-  const network = "testnet";
 
   const Register = async (values) => {
+    await dispatch(getAddress());
+    console.log("sign up save :::", generatedAddress);
     const { username, email, password, role, level, balance } = values;
-    await signup({ username, email, password, role, level, balance });
+    await signup({ username, email, password, role, level, balance, generatedAddress });
     // await signin({ username, password });
-    dispatch(getAddress(walletId, blockchain, network));
   }
 
   const formik = useFormik({
@@ -133,7 +131,7 @@ export default function RegisterTabPanel() {
         error={formik.touched.username && Boolean(formik.errors.username)}
         helperText={
           formik.touched.username && formik.errors.username ? (
-            <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+            <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
               <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
               {formik.touched.username && formik.errors.username}
             </Typography>) : (<></>)
@@ -150,7 +148,7 @@ export default function RegisterTabPanel() {
         error={formik.touched.email && Boolean(formik.errors.email)}
         helperText={
           formik.touched.email && formik.errors.email ? (
-            <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+            <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
               <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
               {formik.touched.email && formik.errors.email}
             </Typography>) : (<></>)
@@ -170,7 +168,7 @@ export default function RegisterTabPanel() {
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={
                 formik.touched.password && formik.errors.password ? (
-                  <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+                  <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
                     <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
                     {formik.touched.password && formik.errors.password}
                   </Typography>) : (<></>)
@@ -188,7 +186,7 @@ export default function RegisterTabPanel() {
               error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
               helperText={
                 formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-                  <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+                  <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
                     <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
                     {formik.touched.confirmPassword && formik.errors.confirmPassword}
                   </Typography>) : (<></>)
@@ -203,7 +201,7 @@ export default function RegisterTabPanel() {
         PLAY NOW
       </LoginButton>
 
-      <Typography fontFamily="Montserrat" textAlign="center" fontSize={14} fontWeight={700}>OR</Typography>
+      <Typography fontFamily="'Montserrat', sans-serif" textAlign="center" fontSize={14} fontWeight={700}>OR</Typography>
 
       <Stack direction="row" spacing={0.5} justifyContent="space-between">
         {/* <SocialButton sx={{ fontSize: 42, width: '33%' }}>
@@ -225,10 +223,10 @@ export default function RegisterTabPanel() {
           marginTop: "24px!important"
         }}
       >
-        <Typography fontFamily="Montserrat" textAlign="center" color="#f8bf60" fontSize={14} fontWeight={700}>
+        <Typography fontFamily="'Montserrat', sans-serif" textAlign="center" color="#f8bf60" fontSize={14} fontWeight={700}>
           Forgot Password?
         </Typography>
-        <Typography fontFamily="Montserrat" textAlign="center" color="#f8bf60" fontSize={14} fontWeight={700}>
+        <Typography fontFamily="'Montserrat', sans-serif" textAlign="center" color="#f8bf60" fontSize={14} fontWeight={700}>
           Create an Account?
         </Typography>
       </Stack>

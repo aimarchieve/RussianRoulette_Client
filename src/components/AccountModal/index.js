@@ -83,7 +83,7 @@ export default function AccountModal() {
       maxWidth="sm"
     >
       <DialogTitle id="responsive-dialog-title" onClose={closeAccountModal}>
-        <Typography fontSize={18} fontWeight={700} fontFamily="Montserrat" textTransform="uppercase" textAlign="center">
+        <Typography fontSize={18} fontWeight={700} fontFamily="'Montserrat', sans-serif" textTransform="uppercase" textAlign="center">
           Account
         </Typography>
       </DialogTitle>

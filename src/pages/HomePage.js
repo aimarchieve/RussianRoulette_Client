@@ -14,13 +14,13 @@ export default function HomePage() {
 
   return (
     <Box sx={{ minHeight: '103vh', bgcolor: '#1c2127' }}>
-      <Grid container sx={{ flexGrow: 1 }} spacing={1} columns={6}>
+      <Grid container sx={{ flexGrow: 1 }} columns={6}>
         <Grid item xs={6} md={chat ? 5 : 6} >
           <TopBar chat={chat} setChat={setChat} />
           <Box maxWidth="2xl">
             <Stack>
               <Header />
-              <Grid container sx={{ flexGrow: 1 }} spacing={1} columns={6}>
+              <Grid container sx={{ flexGrow: 1 }} spacing={0.5} columns={6}>
                 <Grid item xs={6} md={1}><PlayerSidebar gameType={gameType} setGameType={setGameType} /></Grid>
                 <Grid item xs={6} md={4}><Main gameType={gameType} gameMode={gameMode} /></Grid>
                 <Grid item xs={6} md={1}><TopWinnersSidebar gameMode={gameMode} setGameMode={setGameMode} /></Grid>

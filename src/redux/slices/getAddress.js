@@ -1,4 +1,3 @@
-// import { getGridSingleSelectQuickFilterFn } from '@mui/x-data-grid';
 import { createSlice } from '@reduxjs/toolkit';
 // utils
 import api from '../../utils/api';
@@ -40,23 +39,14 @@ export const { getMorePosts } = slice.actions;
 
 // ----------------------------------------------------------------------
 
-export function getAddress(walletId, blockchain, network) {
+export function getAddress() {
+    
     return async (dispatch) => {
         dispatch(slice.actions.startLoading());
         try {
-            const context = {
-                "context": "yourExampleString",
-                "data": {
-                    "item": {
-                        "label": "yourLabelStringHere"
-                    }
-                }
-            };
-            const response = await api.post(
-                `https://rest.cryptoapis.io/v2/wallet-as-a-service/wallets/${walletId}/${blockchain}/${network}/addresses?context=yourExampleString`,
-                context);
-            console.log("getGeneratedAddress Result: ", response.data);
-            dispatch(slice.actions.getGeneratedAddress(response.data.address));
+            const response = await api.get('/userinfo/getGeneratedAddress');
+            console.log("generated address:", response.data.data.item.address);
+            dispatch(slice.actions.getGeneratedAddress(response.data.data.item.address));
         } catch (error) {
             console.log('# get Address Error => ', error);
             dispatch(slice.actions.hasError(error));

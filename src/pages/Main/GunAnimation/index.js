@@ -3,11 +3,11 @@ import Countdown from 'react-countdown'
 import './style.css'
 
 const GunAnimation = (props) => {
-    const [nowDate, setNowDate] = useState(Date.now())
-    const clockRef = useRef()
+    // const [nowDate, setNowDate] = useState(Date.now())
+    // const clockRef = useRef()
 
     const idList = [
-        'timeCounter',
+        // 'timeCounter',
         'gun',
         'hammer',
         'trigger',
@@ -16,7 +16,7 @@ const GunAnimation = (props) => {
     ]
 
     const oldIdList = [
-        'timeCounter-animation',
+        // 'timeCounter-animation',
         'gun-animation',
         'hammer-animation',
         'trigger-animation',
@@ -24,19 +24,19 @@ const GunAnimation = (props) => {
         'main_content-animation',
     ]
 
-    const renderer = (props) => {
-        return (
-            <div className="timeCounter" id="timeCounter">
-                {(props.total / 1000).toFixed(2)}
-            </div>
-        )
-    }
+    // const renderer = (props) => {
+    //     return (
+    //         <div className={props.isStart === 'group' ? "timeCounter timeCounter-animation" : "timeCounter"} id="timeCounter">
+    //             {(props.total / 1000).toFixed(2)}
+    //         </div>
+    //     )
+    // }
 
-    const removeClassName = (idList) => {
-        for (let i = 0; i < idList.length; i++) {
+    const removeClassName = (removeIdList) => {
+        for (let i = 0; i < removeIdList.length; i++) {
             const el = document.getElementById(idList[i])
             if (el !== null) {
-                el.classList.remove(idList[i])
+                el.classList.remove(removeIdList[i])
                 void el.offsetWidth
                 void el.offsetHeight
             }
@@ -50,33 +50,33 @@ const GunAnimation = (props) => {
         }
     }
 
-    const handleStart = () => clockRef.current.start()
+    // const handleStart = () => clockRef.current.start()
 
     const resetAnimation = () => {
         removeClassName(oldIdList)
         addClassName(idList, oldIdList)
-        setNowDate(Date.now())
-        handleStart()
-        props.setIsStart(false)
+        // setNowDate(Date.now())
+        // handleStart()
+        props.setGunStart(false)
     }
 
     useEffect(() => {
-        if (props.isStart) {
+        if (props.isStart === 'solo' && props.gunStart) {
             resetAnimation()
         }
-    }, [props.isStart])
+    }, [props.isStart, props.gunStart])
 
     return (
         <div className="App">
             <header className="App-header">
-                <Countdown
+                {/* <Countdown
                     date={nowDate + 3000}
                     intervalDelay={0}
                     precision={2}
                     renderer={renderer}
                     autoStart={false}
                     ref={clockRef}
-                />
+                /> */}
                 <div className="main_content" id="main_content">
                     <img
                         src="assets/frame.png"

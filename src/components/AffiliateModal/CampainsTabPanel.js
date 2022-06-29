@@ -113,7 +113,7 @@ const TableHead = styled(MuiTableHead)(({ theme }) => ({
 const TableCell = styled(MuiTableCell)(({ theme }) => ({
     borderBottom: 'none',
     textAlign: 'center',
-    fontFamily: 'Montserrat',
+    fontFamily: "'Montserrat', sans-serif",
     paddingTop: 4,
     paddingBottom: 4,
     fontSize: 12,
@@ -135,6 +135,7 @@ export default function CampainsTabPanel() {
                     fontSize={14}
                     fontWeight={700}
                     color="#ffffff"
+                    fontFamily="'Montserrat', sans-serif"
                 >
                     Invite your friends and receive commission from every bet! You will receive commision for every user that
                     registers and plays through your links, regardless if they win or lose!
@@ -153,6 +154,7 @@ export default function CampainsTabPanel() {
                     fontSize={13}
                     fontWeight={700}
                     color="#ffffff"
+                    fontFamily="'Montserrat', sans-serif"
                 >
                     share your link and invite friends
                 </Typography>
@@ -161,6 +163,7 @@ export default function CampainsTabPanel() {
                     fontWeight={700}
                     color="#ffffff"
                     p={2}
+                    fontFamily="'Montserrat', sans-serif"
                 >
                     >
                 </Typography>
@@ -168,6 +171,7 @@ export default function CampainsTabPanel() {
                     fontSize={13}
                     fontWeight={700}
                     color="#ffffff"
+                    fontFamily="'Montserrat', sans-serif"
                 >
                     receive commission on every bet
                 </Typography>
@@ -176,6 +180,7 @@ export default function CampainsTabPanel() {
                     fontWeight={700}
                     color="#ffffff"
                     p={2}
+                    fontFamily="'Montserrat', sans-serif"
                 >
                     >
                 </Typography>
@@ -183,6 +188,7 @@ export default function CampainsTabPanel() {
                     fontSize={13}
                     fontWeight={700}
                     color="#ffffff"
+                    fontFamily="'Montserrat', sans-serif"
                 >
                     stake to increase rewards exponentially
                 </Typography>
@@ -208,6 +214,7 @@ export default function CampainsTabPanel() {
                         fontWeight={700}
                         textTransform="uppercase"
                         color="goldenrod"
+                        fontFamily="'Montserrat', sans-serif"
                     >
                         campain hits
                     </Typography>
@@ -216,6 +223,7 @@ export default function CampainsTabPanel() {
                         fontWeight={700}
                         textTransform="uppercase"
                         color="#ffffff"
+                        fontFamily="'Montserrat', sans-serif"
                     >
                         1,059,530.08
                     </Typography>
@@ -232,6 +240,7 @@ export default function CampainsTabPanel() {
                         fontWeight={700}
                         textTransform="uppercase"
                         color="goldenrod"
+                        fontFamily="'Montserrat', sans-serif"
                     >
                         referrals
                     </Typography>
@@ -240,6 +249,7 @@ export default function CampainsTabPanel() {
                         fontWeight={700}
                         textTransform="uppercase"
                         color="#ffffff"
+                        fontFamily="'Montserrat', sans-serif"
                     >
                         1,059,530.08
                     </Typography>
@@ -256,6 +266,7 @@ export default function CampainsTabPanel() {
                         fontWeight={700}
                         textTransform="uppercase"
                         color="goldenrod"
+                        fontFamily="'Montserrat', sans-serif"
                     >
                         depositors
                     </Typography>
@@ -264,6 +275,7 @@ export default function CampainsTabPanel() {
                         fontWeight={700}
                         textTransform="uppercase"
                         color="#ffffff"
+                        fontFamily="'Montserrat', sans-serif"
                     >
                         1,059,530.08
                     </Typography>
@@ -280,6 +292,7 @@ export default function CampainsTabPanel() {
                         fontWeight={700}
                         textTransform="uppercase"
                         color="goldenrod"
+                        fontFamily="'Montserrat', sans-serif"
                     >
                         deposits
                     </Typography>
@@ -288,6 +301,7 @@ export default function CampainsTabPanel() {
                         fontWeight={700}
                         textTransform="uppercase"
                         color="#ffffff"
+                        fontFamily="'Montserrat', sans-serif"
                     >
                         1,059,530.08
                     </Typography>
@@ -304,6 +318,7 @@ export default function CampainsTabPanel() {
                         fontWeight={700}
                         textTransform="uppercase"
                         color="goldenrod"
+                        fontFamily="'Montserrat', sans-serif"
                     >
                         total
                     </Typography>
@@ -312,6 +327,7 @@ export default function CampainsTabPanel() {
                         fontWeight={700}
                         textTransform="uppercase"
                         color="#ffffff"
+                        fontFamily="'Montserrat', sans-serif"
                     >
                         1,059,530.08
                     </Typography>
@@ -328,6 +344,7 @@ export default function CampainsTabPanel() {
                         fontWeight={700}
                         textTransform="uppercase"
                         color="goldenrod"
+                        fontFamily="'Montserrat', sans-serif"
                     >
                         available
                     </Typography>
@@ -336,6 +353,7 @@ export default function CampainsTabPanel() {
                         fontWeight={700}
                         textTransform="uppercase"
                         color="#ffffff"
+                        fontFamily="'Montserrat', sans-serif"
                     >
                         1,059,530.08
                     </Typography>
@@ -384,7 +402,13 @@ export default function CampainsTabPanel() {
                                                     className='bg-yellow'
                                                     borderRadius={1}
                                                 >
-                                                    <Typography color="#000000" fontSize={12} fontWeight={900} textTransform="uppercase" >
+                                                    <Typography
+                                                        color="#000000"
+                                                        fontSize={12}
+                                                        fontWeight={900}
+                                                        textTransform="uppercase"
+                                                        fontFamily="'Montserrat', sans-serif"
+                                                    >
                                                         copy
                                                     </Typography>
                                                 </Box>
@@ -409,6 +433,7 @@ export default function CampainsTabPanel() {
                         fontSize={14}
                         fontWeight={700}
                         color="#000000"
+                        fontFamily="'Montserrat', sans-serif"
                     >
                         stake commission
                     </Typography>

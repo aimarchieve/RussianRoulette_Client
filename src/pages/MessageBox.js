@@ -11,7 +11,6 @@ import {
 } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 
-
 const tableData = [
     { id: 1, name: '75 Kusti', text: 'Text chat message 24 text chat message 24 text chat message 24 text', color: '#2995bd' },
     { id: 2, name: '75 Kusti', text: 'Text chat message 24 text chat message 24 text chat message 24 text', color: '#2995bd' },

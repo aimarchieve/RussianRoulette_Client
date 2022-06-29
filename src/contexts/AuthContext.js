@@ -160,7 +160,6 @@ function AuthProvider({ children }) {
           type: 'SET_MODAL_IS_OPENED',
           payload: false
         }); 
-
         alert('Done!');
       })
       .catch(error => {

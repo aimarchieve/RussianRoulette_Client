@@ -110,7 +110,7 @@ export default function UserStatsModal() {
             backgroundColor="#2c3137"
         >
             <DialogTitle id="responsive-dialog-title" onClose={closeUserStatsModal}>
-                <Typography fontSize={18} fontWeight={700} fontFamily="Montserrat" textTransform="uppercase">
+                <Typography fontSize={18} fontWeight={700} fontFamily="'Montserrat', sans-serif" textTransform="uppercase">
                     user stats
                 </Typography>
             </DialogTitle>

@@ -3,15 +3,13 @@ import axios from 'axios';
 const api = axios.create({
   baseURL: '/api',
   headers: {
+     Accept: 'application/json',
     'Content-Type': 'application/json',
-    'X-Api-Key': 'ea525738b2a0d95fd70e203013f6ee3e49c3e227',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Expose-Headers': 'Content-Length, X-JSON, Origin, Content-Type, X-Auth-Token',
-    'Access-Control-Allow-Methods': 'HEAD, GET, POST, PATCH, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': '*'
+    'X-API-Key': 'ea525738b2a0d95fd70e203013f6ee3e49c3e227'
   }
 });
-
+api.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
+// api.defaults.headers.options['Access-Control-Allow-Origin'] = '*'
 api.interceptors.response.use(
   (res) => res,
   (err) => {

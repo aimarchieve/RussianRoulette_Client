@@ -12,7 +12,6 @@ import {
     Slider as MuiSlider
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { TabContext, TabPanel } from '@mui/lab';
 import CloseIcon from '@mui/icons-material/Close';
 import useBetList from '../../hooks/useBetList';
 import DiamondIcon from '@mui/icons-material/Diamond';
@@ -23,6 +22,8 @@ import TabsUnstyled from '@mui/base/TabsUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
 import { grey } from '@mui/material/colors';
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGem } from "@fortawesome/free-solid-svg-icons";
 
 /* ---------------------------------------------------------------------------------------- */
 
@@ -36,44 +37,44 @@ const Slider = styled(MuiSlider)(({ theme }) => ({
     width: '94%',
     marginRight: '25px',
     '& .MuiSlider-rail': {
-        color: '#1b2026',
-        boxShadow: '0 5px 0 #21262c',
+        color: '#000000',
         height: '6px',
     },
     '& .MuiSlider-track': {
         height: '4px',
         color: '#f8bf60',
-        boxShadow: '0 4px 0 #a6824a',
     },
     '& .MuiSlider-thumbColorPrimary': {
         border: 'none',
         outline: 'none',
         background: '#f8bf60',
         borderRadius: '2px',
-        width: '30px',
-        height: '10px',
-        boxShadow: '0 4px 0 #a6824a'
+        width: '44px',
+        height: '22px',
     },
     '& .MuiSlider-mark': {
         border: 'none',
         outline: 'none',
-        background: '#1b2026',
-        borderRadius: '2px',
-        width: '5%',
-        height: '8px',
-        boxShadow: '0 4px 0 #22272d',
-        borderLeft: '2px solid #2c3137',
-        borderRight: '2px solid #2c3137',
+        background: '#000000',
+        opacity: 0.6,
+        width: '6.5%',
+        height: '15px',
+        borderTop: '1px solid #2c3137',
+        borderBottom: '1px solid #2c3137',
+        borderLeft: '3px solid #2c3137',
+        borderRight: '3px solid #2c3137',
     },
     '& .MuiSlider-markActive': {
         border: 'none',
+        opacity: 1,
         outline: 'none',
-        width: '5%',
-        height: '8px',
+        width: '6.5%',
+        height: '15px',
         background: '#f8bf60',
-        boxShadow: '0 4px 0 #a6824a',
-        borderLeft: '2px solid #a6824a',
-        borderRight: '2px solid #a6824a'
+        borderTop: '1px solid #2c3137',
+        borderBottom: '1px solid #2c3137',
+        borderLeft: '3px solid #2c3137',
+        borderRight: '3px solid #2c3137',
     }
 }));
 
@@ -147,7 +148,7 @@ export default function BetListModal() {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-    const { modalIsOpened, currentTab, closeBetListModal, handleCurrentTab } = useBetList();
+    const { modalIsOpened, closeBetListModal } = useBetList();
 
     return (
         <Dialog
@@ -160,7 +161,7 @@ export default function BetListModal() {
             backgroundColor="#2c3137"
         >
             <DialogTitle id="responsive-dialog-title" onClose={closeBetListModal}>
-                <Typography fontSize={18} fontWeight={700} fontFamily="Montserrat" textTransform="uppercase">
+                <Typography fontSize={18} fontWeight={700} fontFamily="'Montserrat', sans-serif" textTransform="uppercase">
                     betlist
                 </Typography>
             </DialogTitle>
@@ -180,12 +181,12 @@ export default function BetListModal() {
                             <Typography
                                 fontSize={16}
                                 fontWeight={700}
-                                fontFamily="Montserrat"
+                                fontFamily="'Montserrat', sans-serif"
                                 padding={2}
                                 pl={4}
                                 sx={{ display: 'flex', flexDirection: 'row', direction: 'row', alignItems: 'center' }}
                             >
-                                My Betlist (5.00 <DiamondIcon sx={{ fontSize: 20 }} className="text-yellow" /> )
+                                My Betlist (5.00 <FontAwesomeIcon icon={faGem} className="text-yellow" style={{ paddingLeft: '1px' }} /> )
                             </Typography>
                             <ArrowDropDownIcon
                                 sx={{ fontSize: 30, paddingRight: 3 }}
@@ -199,7 +200,7 @@ export default function BetListModal() {
                                 fontSize={16}
                                 padding={2}
                                 textTransform="uppercase"
-                                fontFamily="Montserrat"
+                                fontFamily="'Montserrat', sans-serif"
                                 fontWeight={700}
                             >
                                 import
@@ -214,7 +215,7 @@ export default function BetListModal() {
                                 fontSize={16}
                                 padding={2}
                                 textTransform="uppercase"
-                                fontFamily="Montserrat"
+                                fontFamily="'Montserrat', sans-serif"
                                 fontWeight={700}
                             >
                                 export
@@ -259,7 +260,7 @@ export default function BetListModal() {
                                     fontWeight={600}
                                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> 10.00 | <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> <span className='text-yellow'> 30.00 </span>
+                                    <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 10.00 | <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span>  <span className='text-yellow'> 30.00 </span>
                                 </Typography>
                             </Box>
 
@@ -281,7 +282,7 @@ export default function BetListModal() {
                                     fontWeight={600}
                                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> 500.00 | <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> <span className='text-yellow'> 25.00 </span>
+                                    <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 500.00 | <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> <span className='text-yellow'> 25.00 </span>
                                 </Typography>
                             </Box>
 
@@ -303,7 +304,7 @@ export default function BetListModal() {
                                     fontWeight={600}
                                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> 100.00 | <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> <span className='text-yellow'> 50.00 </span>
+                                    <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 100.00 | <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> <span className='text-yellow'> 50.00 </span>
                                 </Typography>
                             </Box>
                         </Box>
@@ -329,7 +330,7 @@ export default function BetListModal() {
                                     fontWeight={600}
                                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> 4.00 | <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> <span className='text-yellow'> 100.00 </span>
+                                    <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 4.00 | <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> <span className='text-yellow'> 100.00 </span>
                                 </Typography>
                             </Box>
 
@@ -351,7 +352,7 @@ export default function BetListModal() {
                                     fontWeight={600}
                                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> 3.00 | <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> <span className='text-yellow'> 150.00 </span>
+                                    <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 3.00 | <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> <span className='text-yellow'> 150.00 </span>
                                 </Typography>
                             </Box>
 
@@ -373,7 +374,7 @@ export default function BetListModal() {
                                     fontWeight={600}
                                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> 2.00 | <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> <span className='text-yellow'> 50.00 </span>
+                                    <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 2.00 | <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> <span className='text-yellow'> 50.00 </span>
                                 </Typography>
                             </Box>
                         </Box>
@@ -399,7 +400,7 @@ export default function BetListModal() {
                                     fontWeight={600}
                                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> 1.00 | <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> <span className='text-yellow'> 5.00 </span>
+                                    <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 1.00 | <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> <span className='text-yellow'> 5.00 </span>
                                 </Typography>
                             </Box>
 
@@ -421,7 +422,7 @@ export default function BetListModal() {
                                     fontWeight={600}
                                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> 3.00 | <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> <span className='text-yellow'> 2.00 </span>
+                                    <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 3.00 | <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> <span className='text-yellow'> 2.00 </span>
                                 </Typography>
                             </Box>
 
@@ -443,7 +444,7 @@ export default function BetListModal() {
                                     fontWeight={600}
                                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> 2.00 | <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> <span className='text-yellow' > 1.00 </span>
+                                    <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 2.00 | <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> <span className='text-yellow' > 1.00 </span>
                                 </Typography>
                             </Box>
 
@@ -465,7 +466,7 @@ export default function BetListModal() {
                                     fontWeight={600}
                                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> 1.00 | <CloseIcon sx={{ fontSize: 16 }} className="text-yellow" /> <span className='text-yellow' > 7.00 </span>
+                                    <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 1.00 | <span className="text-yellow" style={{ fontSize: 16, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> <span className='text-yellow' > 7.00 </span>
                                 </Typography>
                             </Box>
                         </Box>
@@ -479,6 +480,7 @@ export default function BetListModal() {
                         <Typography
                             fontSize={16}
                             fontWeight={600}
+                            fontFamily= "'Montserrat', sans-serif"
                         >
                             Add New Bet
                         </Typography>
@@ -497,14 +499,20 @@ export default function BetListModal() {
                         >
                             <Typography
                                 padding={2}
+                                fontSize={14}
+                                fontWeight={700}
+                                fontFamily= "'Montserrat', sans-serif"
                                 width="60%"
                             >
                                 Bet
                             </Typography>
                             <Typography
                                 width="40%"
+                                fontSize={14}
+                                fontWeight={700}
+                                fontFamily= "'Montserrat', sans-serif"
                             >
-                                <span className='text-yellow' > $ </span> 0.10
+                                <span className='text-yellow' style={{ fontFamily: "'Montserrat', sans-serif" }} > $ </span> 0.10
                             </Typography>
                         </Box>
 
@@ -515,8 +523,13 @@ export default function BetListModal() {
                             padding={2}
                             className="bg-black"
                             textAlign="center"
+                            fontFamily= "'Montserrat', sans-serif"
                         >
-                            <Typography>
+                            <Typography 
+                                fontFamily= "'Montserrat', sans-serif"
+                                fontSize={14}
+                                fontWeight={700}
+                            >
                                 1/2
                             </Typography>
                         </Box>
@@ -528,8 +541,13 @@ export default function BetListModal() {
                             className="bg-black"
                             textAlign="center"
                             borderRadius="0px 5px 5px 0px"
+                            fontFamily= "'Montserrat', sans-serif"
                         >
-                            <Typography>
+                            <Typography
+                                fontFamily= "'Montserrat', sans-serif"
+                                fontSize={14}
+                                fontWeight={700}
+                            >
                                 x2
                             </Typography>
                         </Box>
@@ -552,6 +570,7 @@ export default function BetListModal() {
                             width="65%"
                             fontSize={16}
                             fontWeight={700}
+                            fontFamily= "'Montserrat', sans-serif"
                             className='bg-black'
                             borderRadius="5px 0px 0px 5px"
                             sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
@@ -559,13 +578,19 @@ export default function BetListModal() {
                             <Typography
                                 padding={2}
                                 width="60%"
+                                fontSize={14}
+                                fontWeight={700}
+                                fontFamily= "'Montserrat', sans-serif"
                             >
                                 Payout (<span className='text-yellow' >Bonus</span>)
                             </Typography>
                             <Typography
                                 width="40%"
+                                fontSize={14}
+                                fontWeight={700}
+                                fontFamily= "'Montserrat', sans-serif"
                             >
-                                <span className='text-yellow' > x 30.00 </span>
+                                <span className='text-yellow' style={{ fontFamily: "'Montserrat', sans-serif" }} > x 30.00 </span>
                             </Typography>
                         </Box>
 
@@ -576,8 +601,13 @@ export default function BetListModal() {
                             padding={2}
                             className="bg-black"
                             textAlign="center"
+                            fontFamily= "'Montserrat', sans-serif"
                         >
-                            <Typography>
+                            <Typography
+                                fontFamily= "'Montserrat', sans-serif"
+                                fontSize={14}
+                                fontWeight={700}
+                            >
                                 1/2
                             </Typography>
                         </Box>
@@ -588,9 +618,14 @@ export default function BetListModal() {
                             padding={2}
                             className="bg-black"
                             textAlign="center"
+                            fontFamily= "'Montserrat', sans-serif"
                             borderRadius="0px 5px 5px 0px"
                         >
-                            <Typography>
+                            <Typography
+                                fontFamily= "'Montserrat', sans-serif"
+                                fontSize={14}
+                                fontWeight={700}
+                            >
                                 x2
                             </Typography>
                         </Box>
@@ -615,16 +650,23 @@ export default function BetListModal() {
                             fontWeight={700}
                             className='bg-black'
                             borderRadius="5px 0px 0px 5px"
+                            fontFamily= "'Montserrat', sans-serif"
                             sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
                         >
                             <Typography
                                 padding={2}
                                 width="60%"
+                                fontSize={14}
+                                fontWeight={700}
+                                fontFamily= "'Montserrat', sans-serif"
                             >
                                 Payout (Base)
                             </Typography>
                             <Typography
                                 width="40%"
+                                fontSize={14}
+                                fontWeight={700}
+                                fontFamily= "'Montserrat', sans-serif"
                             >
                                 <span className='text-yellow' > x </span> 1.50
                             </Typography>
@@ -637,8 +679,13 @@ export default function BetListModal() {
                             padding={2}
                             className="bg-black"
                             textAlign="center"
+                            fontFamily= "'Montserrat', sans-serif"
                         >
-                            <Typography>
+                            <Typography
+                                fontFamily= "'Montserrat', sans-serif"
+                                fontSize={14}
+                                fontWeight={700}
+                            >
                                 1/2
                             </Typography>
                         </Box>
@@ -650,8 +697,13 @@ export default function BetListModal() {
                             className="bg-black"
                             textAlign="center"
                             borderRadius="0px 5px 5px 0px"
+                            fontFamily= "'Montserrat', sans-serif"
                         >
-                            <Typography>
+                            <Typography
+                                fontFamily= "'Montserrat', sans-serif"
+                                fontSize={14}
+                                fontWeight={700}
+                            >
                                 x2
                             </Typography>
                         </Box>
@@ -669,8 +721,8 @@ export default function BetListModal() {
                     <Box>
                         <TabsUnstyled defaultValue={1}>
                             <TabsList>
-                                <Tab sx={{ fontFamily: 'Montserrat', fontSize: 16 }}> Clear Betlist </Tab>
-                                <Tab sx={{ fontFamily: 'Montserrat', fontSize: 16 }}> Add to Betlist </Tab>
+                                <Tab sx={{ fontFamily: "'Montserrat', sans-serif", fontSize: 16 }}> Clear Betlist </Tab>
+                                <Tab sx={{ fontFamily: "'Montserrat', sans-serif", fontSize: 16 }}> Add to Betlist </Tab>
                             </TabsList>
                         </TabsUnstyled>
                     </Box>

@@ -106,7 +106,7 @@ export default function TipTabPanel() {
           error={formik.touched.username && Boolean(formik.errors.username)}
           helperText={
             formik.touched.username && formik.errors.username ? (
-              <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+              <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
                 <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
                 {formik.touched.username && formik.errors.username}
               </Typography>) : (<></>)
@@ -123,7 +123,7 @@ export default function TipTabPanel() {
           error={formik.touched.amount && Boolean(formik.errors.amount)}
           helperText={
             formik.touched.amount && formik.errors.amount ? (
-              <Typography component="span" fontFamily="Montserrat" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
+              <Typography component="span" fontFamily="'Montserrat', sans-serif" fontSize={12} fontWeight={700} sx={{ display: 'flex', alignItems: 'center', mx: 0 }}>
                 <Icon icon="ant-design:exclamation-circle-filled" />&nbsp;
                 {formik.touched.amount && formik.errors.amount}
               </Typography>) : (<></>)
@@ -137,11 +137,11 @@ export default function TipTabPanel() {
       <Stack spacing={1}>
         <FormControlLabel
           control={<Checkbox />}
-          label={<Typography fontSize={12} fontWeight={700} fontFamily="Montserrat">Broadcast tip to the public chat</Typography>}
+          label={<Typography fontSize={12} fontWeight={700} fontFamily="'Montserrat', sans-serif">Broadcast tip to the public chat</Typography>}
         />
         <Divider />
         <Stack px={3} spacing={1}>
-          <Typography fontSize={12} fontWeight={700} fontFamily="Montserrat" textAlign="center">
+          <Typography fontSize={12} fontWeight={700} fontFamily="'Montserrat', sans-serif" textAlign="center">
             Improve your account security with Two-Factor Authentication
           </Typography>
           <EnableButton variant="outlined">

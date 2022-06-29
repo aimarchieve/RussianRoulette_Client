@@ -56,7 +56,7 @@ export default function MessageInput({ socket }) {
         <Stack>
             <form onSubmit={submitForm}>
                 <TextField
-                    fontFamily="Montserrat"
+                    fontFamily="'Montserrat', sans-serif"
                     autoFocus
                     value={value}
                     label="Send a message"
@@ -67,7 +67,7 @@ export default function MessageInput({ socket }) {
                 <Box
                     sx={{ display: 'flex', direction: 'row', alignItems: 'center', justifyContent: 'space-between' }}
                 >
-                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', pl: 1 }}>
                         <CircleIcon sx={{ color: '#f8bf60', fontSize: 18 }} />
                         <Typography sx={{ color: 'white', fontSize: 14, fontWeight: 550 }}>12,750</Typography>
                     </Box>

@@ -8,7 +8,6 @@ import {
   styled,
   Tooltip,
   InputAdornment,
-  Icon as MuiIcon,
   TextField as MuiTextField
 } from '@mui/material';
 import { grey } from '@mui/material/colors';
@@ -16,8 +15,8 @@ import TabsUnstyled from '@mui/base/TabsUnstyled';
 import TabsListUnstyled from '@mui/base/TabsListUnstyled';
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
-import { Icon } from '@iconify/react';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
 
 const Tab = styled(TabUnstyled)`
   font-family: IBM Plex Sans, sans-serif;
@@ -64,24 +63,23 @@ const Box = styled(MuiBox)(({ theme }) => ({
 }));
 const Slider = styled(MuiSlider)(({ theme }) => ({
   width: '90%',
+  paddingTop: '3px',
   '& .MuiSlider-rail': {
-    color: '#1b2026',
-    boxShadow: '0 5px 0 #21262c',
+    color: '#000000',
     height: '6px',
+    top: '55%',
   },
   '& .MuiSlider-track': {
     height: '4px',
     color: '#f8bf60',
-    boxShadow: '0 4px 0 #a6824a',
   },
   '& .MuiSlider-thumbColorPrimary': {
     border: 'none',
     outline: 'none',
     background: '#f8bf60',
     borderRadius: '2px',
-    width: '30px',
-    height: '10px',
-    boxShadow: '0 4px 0 #a6824a'
+    width: '44px',
+    height: '22px',
   },
   '& .MuiSlider-mark': {
     border: 'none',
@@ -90,7 +88,6 @@ const Slider = styled(MuiSlider)(({ theme }) => ({
     borderRadius: '2px',
     width: '5%',
     height: '8px',
-    boxShadow: '0 4px 0 #22272d',
     borderLeft: '2px solid #2c3137',
     borderRight: '2px solid #2c3137',
   },
@@ -100,7 +97,6 @@ const Slider = styled(MuiSlider)(({ theme }) => ({
     width: '5%',
     height: '8px',
     background: '#f8bf60',
-    boxShadow: '0 4px 0 #a6824a',
     borderLeft: '2px solid #a6824a',
     borderRight: '2px solid #a6824a'
   }
@@ -133,11 +129,11 @@ function ValueLabelComponent(props) {
 
 export default function RightSlider({ payout, setPayout }) {
   return (
-    <Stack px={0.25} py={0.5} borderRadius={1} spacing={0.5} className="bg-dark">
+    <Stack px={0.5} py={1} borderRadius={1} spacing={0.5} className="bg-dark">
       <TabsUnstyled defaultValue={0}>
-        <TabsList>
-          <Tab sx={{ fontFamily: 'Montserrat', textTransform: 'uppercase' }}>Base</Tab>
-          <Tab sx={{ fontFamily: 'Montserrat', textTransform: 'uppercase' }}>Bonus</Tab>
+        <TabsList sx={{ marginBottom: '8px' }}>
+          <Tab sx={{ fontFamily: "'Montserrat', sans-serif", textTransform: 'uppercase' }}>Base</Tab>
+          <Tab sx={{ fontFamily: "'Montserrat', sans-serif", textTransform: 'uppercase' }}>Bonus</Tab>
         </TabsList>
       </TabsUnstyled>
 
@@ -151,7 +147,7 @@ export default function RightSlider({ payout, setPayout }) {
                   sx={{ display: 'flex', alignItems: 'center', fontSize: {lg:14, md:12, sm:10, xs:10} }}
                   fontWeight={700}
                   pl={1}
-                  fontFamily="Montserrat"
+                  fontFamily="'Montserrat', sans-serif"
                 >
                   Payout <ArrowDropDownIcon sx={{ fontSize: 16 }} />
                 </Typography>
@@ -166,7 +162,7 @@ export default function RightSlider({ payout, setPayout }) {
                         <Typography
                           color="#f8bf60"
                           fontWeight={700}
-                          fontFamily="Montserrat"
+                          fontFamily="'Montserrat', sans-serif"
                           sx={{ fontSize: { lg:14, md:12, sm: 10, xs:10 } }}
                         >
                           X
@@ -186,7 +182,7 @@ export default function RightSlider({ payout, setPayout }) {
                 <Typography
                   color="white"
                   fontWeight={800}
-                  fontFamily="Montserrat"
+                  fontFamily="'Montserrat', sans-serif"
                   textAlign="center"
                 ><Typography variant="span" sx={{ fontSize: { lg: 14, md: 12, sm: 10, xs: 10 } }}>1/2</Typography></Typography>
               </Stack>
@@ -194,12 +190,12 @@ export default function RightSlider({ payout, setPayout }) {
           </Grid>
 
           <Grid item md={1} xs={1} sx={{ borderLeft: '2px solid #2c3137' }}>
-            <Box bgcolor="black" borderRadius={1} p={1}>
+            <Box bgcolor="black" borderRadius={1} p={1} >
               <Stack justifyContent="center">
                 <Typography
                   color="white"
                   fontWeight={800}
-                  fontFamily="Montserrat"
+                  fontFamily="'Montserrat', sans-serif"
                   textAlign="center"
                 >
                   <Typography variant="span" sx={{ fontSize: { lg: 14, md: 12, sm: 10, xs: 10 } }}>

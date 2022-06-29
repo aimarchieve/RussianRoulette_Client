@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button as MuiButton, ButtonGroup, Grid, Stack, Typography, styled } from '@mui/material';
 import ReplayIcon from '@mui/icons-material/Replay';
 import DiamondIcon from '@mui/icons-material/Diamond';
@@ -17,10 +17,15 @@ import PercentIcon from '@mui/icons-material/Percent';
 import Button from '@mui/material/Button';
 import { Icon } from '@iconify/react';
 import GunAnimation from './GunAnimation';
+import GroupAnimation from './GroupAnimation';
 import './style.css';
 import { addNewGame } from '../../redux/slices/game';
+import { getGameInfo } from '../../redux/slices/game';
 import { useDispatch, useSelector } from '../../redux/store';
 import Marquee from "react-easy-marquee";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSyncAlt, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faGem } from "@fortawesome/free-solid-svg-icons";
 
 const betPercentagesData = [
   { bgColor: 'bg-green', value: 14.52 },
@@ -64,13 +69,15 @@ export default function Main(props) {
   const { currentUser } = useAuth();
   const [speed, setSpeed] = useState(0);
   const dispatch = useDispatch();
-  const { result, randomNumbers } = useSelector((state) => state.game);
+  const { result, randomNumbers, gameInfo } = useSelector((state) => state.game);
   const [autoplay, setAutoplay] = useState(false);
   const [advancedAutoplay, setAdvancedAutoplay] = useState(false);
   const { openBetListModal } = useBetList();
   const { openGameInfoModal } = useGameInfo();
-  const [isStart, setIsStart] = useState(false);
+  const [isStart, setIsStart] = useState('');
+  const [gunStart, setGunStart] = useState(false);
   const [startRandomGenerate, setStartRandomGenerate] = useState(false);
+  const [soloPlay, setSoloPlay] = useState(false)
   const [betPercentages, setBetPercentages] = useState([
     { bgColor: 'bg-green', value: 14.52 },
     { bgColor: 'bg-yellow', value: 71.39 },
@@ -96,8 +103,9 @@ export default function Main(props) {
     setAutoplay(true);
   }
   const animationStart = () => {
-    setIsStart(true)
+    setGunStart(true)
     setStartRandomGenerate(true)
+    setSoloPlay(true)
   }
 
   const getRandomInt = (min, max) => {
@@ -117,14 +125,32 @@ export default function Main(props) {
     }
   }
 
-  const startGame = () => {
+  const startGame = async () => {
+    animationStart();
     setSpeed(3500);
     closehandleAutoplay();
-    animationStart();
     if (currentUser) {
       dispatch(addNewGame(wagered, payout, currentUser.username, props.gameMode, props.gameType, currentUser._id));
     }
+    setTimeout(() => dispatch(getGameInfo()), 5800);
   }
+
+  const getLatestHistory = () => {
+    if (!gameInfo.length > 0) return [];
+    var nArr = gameInfo.slice((gameInfo.length - 10), gameInfo.length);
+    var rArr = [];
+    for (let i = 10; i > 0; i--) rArr.push(nArr[i - 1].result);
+    return rArr;
+  }
+
+  // useEffect(() => {
+  //   // const ct = 20, po = 4, dn = 7, idx = randomNumbers.indexOf(result);
+  //   // const currSpeed = 5700 / (ct * 1 + (ct - ( po-idx)));
+
+  //   // console.log(randomNumbers, result, idx);
+  //   // setSpeed(currSpeed);    
+  //   setSpeed(3500);
+  // }, [randomNumbers, result])
 
   useEffect(() => {
     if (startRandomGenerate) {
@@ -139,17 +165,48 @@ export default function Main(props) {
   }, [startRandomGenerate])
 
   useEffect(() => {
+    dispatch(getGameInfo());
+  }, [])
+
+  useEffect(() => {
+    setIsStart(props.gameMode)
+  }, [props.gameMode])
+
+  useEffect(() => {
     if (speed > 0) {
-      setTimeout(() => setSpeed(0), 5700);
+      if (props.gameMode === 'solo') {
+        setTimeout(() => setSpeed(0), 2700);
+      } else {
+        setTimeout(() => setSpeed(0), 5700);
+      }
     }
   }, [speed])
+
+  useEffect(() => {
+    if (props.gameMode === 'group') {
+      setSoloPlay(false)
+      const interval = setInterval(() => {
+        setSpeed(3500);
+      }, 6000)
+      setSpeed(3500)
+      setStartRandomGenerate(true)
+      if (currentUser) {
+        dispatch(addNewGame(wagered, payout, currentUser.username, props.gameMode, props.gameType, currentUser._id));
+      }
+      return () => clearInterval(interval)
+    } else if (props.gameMode === 'solo' && !soloPlay) {
+      setStartRandomGenerate(false)
+      setSpeed(0)
+    }
+  }, [currentUser, props.gameMode, soloPlay])
+
   return (
     <Stack>
       <Stack spacing={0.5} justifyContent="space-between" sx={{ height: '82vh' }}>
         {/* Topbar percentages */}
         <Grid container columns={7} alignItems="center">
-          <Grid item md={1} sx={{ display: { xs:'none', md: 'flex' } }} >
-            <Stack direction="row" justifyContent="center" className="bg-dark" sx={{ height: {lg:55, md:40, sm:35, xs:20} }} borderRadius={1}>
+          <Grid item md={1} sx={{ display: { xs: 'none', md: 'flex' } }} >
+            <Stack direction="row" justifyContent="center" className="bg-dark" sx={{ height: { lg: 55, md: 40, sm: 35, xs: 20 } }} borderRadius={1}>
               <Box
                 component="img"
                 src="/assets/images/logo.png"
@@ -160,26 +217,26 @@ export default function Main(props) {
           </Grid>
 
           <Grid item xs={7} md={5}>
-            <Box position="relative" sx={{ height: { lg:55, md:45, sm:35, xs:30 } }}>
+            <Box position="relative" sx={{ height: { lg: 55, md: 45, sm: 35, xs: 30 } }}>
               <Box
                 width={5}
                 className="bg-dark"
                 position="absolute"
-                sx={{ display: { xs: 'none', md: 'flex' }, right: '50%', zIndex: 1000, opacity: 0.5, height: {lg:55, md:40, sm:35, xs:20} }}
+                sx={{ display: { xs: 'none', md: 'flex' }, right: '50%', zIndex: 1000, opacity: 0.5, height: { lg: 55, md: 40, sm: 35, xs: 20 } }}
               />
               <Grid container columns={5} height={55}>
                 <Marquee
                   duration={speed}
-                  sx={{ height:{lg:55, md:40, sm:35, xs:20} }}
+                  sx={{ height: { lg: 55, md: 40, sm: 35, xs: 20 } }}
                 >
                   {
                     randomNumbers.map((percentageItem, index) => (
                       <Grid
                         item
                         key={index}
-                        sx={{ height: {lg:75, md:75, sm:75, xs:75}, width:{ lg: '130px', md: '110px', sm: '90px', xs: '80px'} }}
+                        sx={{ height: { lg: 75, md: 75, sm: 75, xs: 75 }, width: { lg: '130px', md: '110px', sm: '90px', xs: '80px' } }}
                       >
-                        <Stack borderRadius={1} className={betPercentagesData[(index + 1) % 4].bgColor} sx={{ height: {lg:50, md:40, sm:35, xs:20} }} justifyContent="center" ml={0.5}>
+                        <Stack borderRadius={1} className={betPercentagesData[(index + 1) % 4].bgColor} sx={{ height: { lg: 50, md: 40, sm: 35, xs: 20 } }} justifyContent="center" ml={0.5}>
                           <Typography
                             sx={{
                               display: 'flex',
@@ -187,8 +244,8 @@ export default function Main(props) {
                               height: 'auto',
                               my: 'auto',
                               justifyContent: 'center',
-                              fontFamily: 'Montserrat',
-                              fontSize: { lg:20, md:18, sm: 16, xs:14 }
+                              fontFamily: "'Montserrat', sans-serif",
+                              fontSize: { lg: 26, md: 22, sm: 18, xs: 14 }
                             }}
                             fontWeight={700}
                           >
@@ -204,7 +261,7 @@ export default function Main(props) {
           </Grid>
 
           <Grid item md={1} sx={{ display: { xs: 'none', md: 'flex' } }} >
-            <Stack direction="row" justifyContent="center" className="bg-dark" sx={{height: {lg:55, md:40, sm:35, xs:20}}} borderRadius={1} ml={0.5}>
+            <Stack direction="row" justifyContent="center" className="bg-dark" sx={{ height: { lg: 55, md: 40, sm: 35, xs: 20 } }} borderRadius={1} ml={0.5}>
               <Box
                 component="img"
                 src="/assets/images/logo.png"
@@ -215,34 +272,32 @@ export default function Main(props) {
           </Grid>
         </Grid>
 
-        <Stack justifyContent="center" alignItems="center" className="bg-dark" borderRadius={1} sx={{ flexGrow: 1, padding: {xs:2, md:0} }}>
-          <GunAnimation isStart={isStart} setIsStart={setIsStart} />
+        <Stack justifyContent="center" alignItems="center" className="bg-dark" borderRadius={1} sx={{ flexGrow: 1, padding: { xs: 2, md: 0 } }}>
+          {isStart === 'group' ? <GroupAnimation /> : isStart === 'solo' && <GunAnimation isStart={isStart} setIsStart={setIsStart} gunStart={gunStart} setGunStart={setGunStart} setSpeed={setSpeed} />}
         </Stack>
 
         <Stack sx={{ top: 'auto', bottom: 0 }} spacing={0.5}>
           <Box className="bg-dark" px={0.25} py={0.5} borderRadius={1}>
             <Grid container columns={10}>
               {
-                bottomBetPercentages.map((percentageItem, index) => (
-                  <Grid item key={percentageItem.value} md={1} xs={1} lg={1} >
+                getLatestHistory().map((percentageItem, index) => (
+                  <Grid item key={index} md={1} xs={1} lg={1} >
                     <Stack
                       borderRadius={1}
                       className={bottomBetPercentages[index].bgColor}
-                      sx={{ height: {lg:35, xs:20}, cursor: 'pointer' }}
+                      sx={{ height: { lg: 35, xs: 20 }, cursor: 'pointer' }}
                       justifyContent="center"
                       textAlign="center"
                       mx={0.25}
                       onClick={openGameInfoModal}
                     >
-                      {/* <Button > */}
-                        <Typography
-                          sx={{ display: 'flex', alignItems: 'center', height: 'auto', my: 'auto', justifyContent: 'center', fontSize:{lg:20, md:16, sm:12, xs:8}, fontWeight: { lg:700, md:650, sm:600, xs:550 } }}
-                          fontFamily="Montserrat"
-                          color="#000000"
-                        >
-                          <span style={{ textTransform: "lowercase" }} >x</span>{percentageItem.value}
-                        </Typography>
-                      {/* </Button> */}
+                      <Typography
+                        sx={{ display: 'flex', alignItems: 'center', height: 'auto', my: 'auto', justifyContent: 'center', fontSize: { lg: 20, md: 16, sm: 12, xs: 8 }, fontWeight: { lg: 700, md: 650, sm: 600, xs: 550 } }}
+                        fontFamily="'Montserrat', sans-serif"
+                        color="#000000"
+                      >
+                        <span style={{ textTransform: "lowercase" }} >x</span>{percentageItem}
+                      </Typography>
                     </Stack>
                   </Grid>
                 ))
@@ -970,93 +1025,99 @@ export default function Main(props) {
                       </Stack> :
                       ''
                   }
+                  <Stack sx={{ backgroundColor: '#2c3137' }}>
+                    <ButtonGroup fullWidth sx={{ height: 60, paddingTop: '8px' }}>
+                      <MainButton
+                        sx={{
+                          color: 'black',
+                          fontSize: 18,
+                          fontWeight: 700,
+                          fontFamily: "Montserrat",
+                          textTransform: 'uppercase',
+                          width: '25%',
+                          lineHeight: 1.2,
+                          margin: 0,
+                          borderRadius: 1
+                        }}
+                      >
+                        Max bet
+                      </MainButton>
 
-                  <ButtonGroup fullWidth sx={{ height: 65 }}>
-                    <MainButton
-                      sx={{
-                        color: 'black',
-                        fontSize: 18,
-                        fontWeight: 700,
-                        fontFamily: "Montserrat",
-                        textTransform: 'uppercase',
-                        width: '25%',
-                        lineHeight: 1.5,
-                        margin: 0,
-                        borderRadius: 0
-                      }}
-                    >
-                      Max bet
-                    </MainButton>
-
-                    <MainButton
-                      sx={{
-                        fontSize: 36,
-                        fontWeight: 800,
-                        fontFamily: "Montserrat",
-                        textTransform: 'uppercase',
-                        color: 'black',
-                        width: '50%',
-                        borderLeft: '2px solid black',
-                        '&:hover': {
-                          borderLeft: '2px solid black'
+                      <MainButton
+                        sx={{
+                          fontSize: 36,
+                          fontWeight: 800,
+                          fontFamily: "Montserrat",
+                          textTransform: 'uppercase',
+                          color: 'black',
+                          width: '50%',
+                          marginLeft: '3px !important',
+                          marginRight: '4px !important',
+                        }}
+                        onClick={startGame}
+                      >
+                        {
+                          (autoplay || advancedAutoplay) ?
+                            'Start'
+                            :
+                            'play'
                         }
-                      }}
-                      onClick={startGame}
-                    >
-                      {
-                        (autoplay || advancedAutoplay) ?
-                          'Start'
-                          :
-                          'play'
-                      }
-                    </MainButton>
+                      </MainButton>
 
-                    <MainButton
-                      sx={{
-                        color: 'black',
-                        width: '25%',
-                        borderLeft: '2px solid black',
-                        '&:hover': {
-                          borderLeft: '2px solid black'
+                      <MainButton
+                        sx={{
+                          color: 'black',
+                          width: '25%',
+                        }}>
+                        {
+                          (autoplay || advancedAutoplay) ?
+                            <Icon icon="mdi:close-thick" onClick={closehandleAutoplay} height="36" />
+                            :
+                            // <ReplayIcon onClick={openhandleAutoplay} sx={{ fontSize: 36, fontWeight: 900 }} />
+                            <>
+                              <FontAwesomeIcon onClick={openhandleAutoplay} fontSize={36} icon={faSyncAlt} />
+                              <Stack sx={{ position: 'absolute', marginLeft: '3.5px' }}>
+                                <FontAwesomeIcon
+                                  icon={faPlay}
+                                  fontSize={11}
+                                />
+                              </Stack>
+                            </>
                         }
-                      }}>
-                      {
-                        (autoplay || advancedAutoplay) ?
-                          <Icon icon="mdi:close-thick" onClick={closehandleAutoplay} height="36" />
-                          :
-                          <ReplayIcon onClick={openhandleAutoplay} sx={{ fontSize: 36, fontWeight: 900 }} />
-                      }
-                    </MainButton>
-                  </ButtonGroup>
+                      </MainButton>
+                    </ButtonGroup>
+                  </Stack>
 
                   <Box
-                  fullWidth
-                  p={0.5}
-                  pb={0.7}
+                    fullWidth
+                    p={0.5}
+                    pb={0.7}
                   >
-                    <Grid container columns={2} spacing={0.3}>
+                    <Grid container columns={2} spacing={0.5}>
                       <Grid item md={1} xs={1}>
-                        <BlackButton sx={{ color: 'white', fontWeight: 750, fontSize: 9, fontFamily: "Montserrat" }} fullWidth>
-                          <Typography
-                           component="span"
-                           fontSize="inherit"
-                           fontWeight="inherit"
-                           sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-                          >
-                          Activate bet-list
-                            </Typography>
-                        </BlackButton>
-                      </Grid>
-
-                      <Grid item md={1} xs={1} spacing={0.3}>
-                        <BlackButton onClick={openBetListModal} sx={{ color: 'white', fontWeight: 750, fontSize: 9, fontFamily: "Montserrat" }} fullWidth>
+                        <BlackButton sx={{ color: 'white', fontWeight: 700, fontSize: 10, fontFamily: "Montserrat", borderRadius: '5px 0px 0px 5px' }} fullWidth>
                           <Typography
                             component="span"
                             fontSize="inherit"
                             fontWeight="inherit"
+                            fontFamily="'Montserrat', sans-serif"
                             sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                           >
-                            View bet-list (total: <DiamondIcon sx={{ fontSize: 9 }} className="text-yellow" /> 5.00)
+                            Activate bet-list
+                          </Typography>
+                        </BlackButton>
+                      </Grid>
+
+                      <Grid item md={1} xs={1} spacing={0.5}>
+                        <BlackButton onClick={openBetListModal} sx={{ color: 'white', fontWeight: 700, fontSize: 10, fontFamily: "Montserrat", borderRadius: '0px 5px 5px 0px' }} fullWidth>
+                          <Typography
+                            component="span"
+                            fontSize="inherit"
+                            fontWeight="inherit"
+                            fontFamily="'Montserrat', sans-serif"
+                            sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                          >
+                            View bet-list (total: <FontAwesomeIcon icon={faGem} className="text-yellow" style={{ fontSize: 10, paddingRight: '2px' }} /> 5.00)
                           </Typography>
                         </BlackButton>
                       </Grid>

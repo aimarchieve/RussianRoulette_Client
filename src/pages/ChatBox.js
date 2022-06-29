@@ -13,6 +13,7 @@ import { Icon } from '@iconify/react';
 import io from 'socket.io-client';
 import MessageBox from './MessageBox';
 import MessageInput from './MessageInput';
+import './chatbox.css';
 
 
 const ChatButton = styled(MuiButton)(({ theme }) => ({
@@ -84,18 +85,18 @@ export default function ChatBox(props) {
     };
 
     return (
-        <Stack>
-            <Box p={0.5} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 3px 0 #121519' }}>
+        <Stack sx={{ backgroundColor: '#20252b' }}>
+            <Box className="one-edge-box" pt={0.5} pb={0.5} pl={0} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <Box sx={{ flexGrow: 0 }}>
-                    <IconButton onClick={handleOpenChatBox} sx={{ p: 0, fontSize: 25, color: 'gray' }}>
-                        <Icon icon="dashicons:arrow-left-alt2" />
+                    <IconButton onClick={handleOpenChatBox} sx={{ pl: 1.5, fontSize: 25, color: 'gray' }}>
+                        <Icon icon="dashicons:arrow-right-alt2" />
                     </IconButton>
                 </Box>
                 <Typography
                     color="white"
                     fontSize={16}
                     fontWeight={700}
-                    fontFamily="Montserrat"
+                    fontFamily="'Montserrat', sans-serif"
                     padding={2}
                 >
                     English Chat Room
