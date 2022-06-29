@@ -69,7 +69,7 @@ export default function Main(props) {
   const { currentUser } = useAuth();
   const [speed, setSpeed] = useState(0);
   const dispatch = useDispatch();
-  const { result, randomNumbers, gameInfo } = useSelector((state) => state.game);
+  const { multiplier, multipliers, gameInfo } = useSelector((state) => state.game);
   const [autoplay, setAutoplay] = useState(false);
   const [advancedAutoplay, setAdvancedAutoplay] = useState(false);
   const { openBetListModal } = useBetList();
@@ -230,7 +230,7 @@ export default function Main(props) {
                   sx={{ height: { lg: 55, md: 40, sm: 35, xs: 20 } }}
                 >
                   {
-                    randomNumbers.map((percentageItem, index) => (
+                    multipliers.map((multiplierItem, index) => (
                       <Grid
                         item
                         key={index}
@@ -249,7 +249,7 @@ export default function Main(props) {
                             }}
                             fontWeight={700}
                           >
-                            x{percentageItem}
+                            x{multiplierItem}
                           </Typography>
                         </Stack>
                       </Grid>
@@ -280,7 +280,7 @@ export default function Main(props) {
           <Box className="bg-dark" px={0.25} py={0.5} borderRadius={1}>
             <Grid container columns={10}>
               {
-                getLatestHistory().map((percentageItem, index) => (
+                getLatestHistory().map((multiplierResult, index) => (
                   <Grid item key={index} md={1} xs={1} lg={1} >
                     <Stack
                       borderRadius={1}
@@ -296,7 +296,7 @@ export default function Main(props) {
                         fontFamily="'Montserrat', sans-serif"
                         color="#000000"
                       >
-                        <span style={{ textTransform: "lowercase" }} >x</span>{percentageItem}
+                        <span style={{ textTransform: "lowercase" }} >x</span>{multiplierResult}
                       </Typography>
                     </Stack>
                   </Grid>

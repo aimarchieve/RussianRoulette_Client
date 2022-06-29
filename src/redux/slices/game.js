@@ -8,8 +8,8 @@ import api from '../../utils/api';
 const initialState = {
   isLoading: false,
   error: false,
-  randomNumbers: [],
-  result: null,
+  multipliers: [],
+  multiplier: null,
   balance: 0,
   gameInfo: [],
 };
@@ -31,12 +31,12 @@ const slice = createSlice({
 
     getRandomNumber(state, action) {
       state.isLoading = false;
-      state.randomNumbers = action.payload;
+      state.multipliers = action.payload;
     },
 
     getResult(state, action) {
       state.isLoading = false;
-      state.result = action.payload;
+      state.multiplier = action.payload;
     },
 
     getBalance(state, action) {
