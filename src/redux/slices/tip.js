@@ -40,6 +40,7 @@ export function addTip(username, type, value, receiveUsername, _id, balance) {
     return async (dispatch) => {
         dispatch(slice.actions.startLoading());
         try {
+            let receiving_balance = balance;
             balance = balance - value;
             let received = 0;
             let receive_value = 0;
@@ -49,7 +50,7 @@ export function addTip(username, type, value, receiveUsername, _id, balance) {
             value = receive_value;
             const res1 = await api.post('/transactionInfo/insertTransactionInfo', { username, value, received, type });
             const response = await api.put(`/userInfo/updateUserInfoById/${_id}`, { balance });
-            balance = balance + received * 2;
+            balance = receiving_balance + received;
             const updatedResult = await api.put('/userInfo/updateUserInfoOne', { receiveUsername, balance });
         } catch (error) {
             dispatch(slice.actions.hasError(error));

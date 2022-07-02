@@ -52,49 +52,49 @@ const TabsList = styled(TabsListUnstyled)`
 `;
 
 const allBetsData = [
-  { id: 1, name: 'tiger', lose: 658, win: 37.56 },
-  { id: 2, name: 'tiger', lose: 7895, win: 97.35 },
-  { id: 3, name: 'tiger', lose: 658, win: 30.56 },
-  { id: 4, name: 'tiger', lose: 500, win: 14.25 },
-  { id: 5, name: 'tiger', lose: 5096, win: 10.56 },
-  { id: 6, name: 'tiger', lose: 7895, win: 97.57 },
-  { id: 7, name: 'tiger', lose: 6.58, win: 37.56 },
+  { id: 1, name: 'tiger', bettingAmount: 658, win: 37.56 },
+  { id: 2, name: 'tiger', bettingAmount: 7895, win: 97.35 },
+  { id: 3, name: 'tiger', bettingAmount: 658, win: 30.56 },
+  { id: 4, name: 'tiger', bettingAmount: 500, win: 14.25 },
+  { id: 5, name: 'tiger', bettingAmount: 5096, win: 10.56 },
+  { id: 6, name: 'tiger', bettingAmount: 7895, win: 97.57 },
+  { id: 7, name: 'tiger', bettingAmount: 6.58, win: 37.56 },
 ];
 
 const tableData = [
-  { id: 1, name: 'tiger', lose: 658.56, win: 37.56 },
-  { id: 2, name: 'tiger', lose: 7895, win: 987.35 },
-  { id: 3, name: 'tiger', lose: 658.56, win: 370.56 },
-  { id: 4, name: 'tiger', lose: 500, win: 14.25 },
-  { id: 5, name: 'tiger', lose: 5096, win: 10.56 },
-  { id: 6, name: 'tiger', lose: 7895, win: 987.35 },
+  { id: 1, name: 'tiger', bettingAmount: 658.56, win: 37.56 },
+  { id: 2, name: 'tiger', bettingAmount: 7895, win: 987.35 },
+  { id: 3, name: 'tiger', bettingAmount: 658.56, win: 370.56 },
+  { id: 4, name: 'tiger', bettingAmount: 500, win: 14.25 },
+  { id: 5, name: 'tiger', bettingAmount: 5096, win: 10.56 },
+  { id: 6, name: 'tiger', bettingAmount: 7895, win: 987.35 },
 ];
 
 const bettingData = [
-  { id: 1, name: 'tiger', lose: 1000, win: 9001.32 },
-  { id: 2, name: 'tiger', lose: 6950.50, win: 47.05 },
-  { id: 3, name: 'tiger', lose: 10000, win: 5.36 },
-  { id: 4, name: 'tiger', lose: 6900, win: 2.36 },
-  { id: 5, name: 'tiger', lose: 2500.50, win: 312.21 },
-  { id: 6, name: 'tiger', lose: 300, win: 1.05 },
-  { id: 7, name: 'tiger', lose: 4000, win: 98.12 },
-  { id: 8, name: 'tiger', lose: 2700, win: 97.45 },
+  { id: 1, name: 'tiger', bettingAmount: 1000, win: 9001.32 },
+  { id: 2, name: 'tiger', bettingAmount: 6950.50, win: 47.05 },
+  { id: 3, name: 'tiger', bettingAmount: 10000, win: 5.36 },
+  { id: 4, name: 'tiger', bettingAmount: 6900, win: 2.36 },
+  { id: 5, name: 'tiger', bettingAmount: 2500.50, win: 312.21 },
+  { id: 6, name: 'tiger', bettingAmount: 300, win: 1.05 },
+  { id: 7, name: 'tiger', bettingAmount: 4000, win: 98.12 },
+  { id: 8, name: 'tiger', bettingAmount: 2700, win: 97.45 },
 ];
 
 const betInfoData = [
-  { id: 1, name: 'tiger', lose: 4100, win: 1.25 },
-  { id: 2, name: 'tiger', lose: 6950.50, win: 47.05 },
+  { id: 1, name: 'tiger', bettingAmount: 4100, win: 1.25 },
+  { id: 2, name: 'tiger', bettingAmount: 6950.50, win: 47.05 },
 ];
 
 const bettingFirstListData = [
-  { id: 1, name: 'tiger', lose: 1000, win: 9001.32 },
-  { id: 2, name: 'tiger', lose: 6950.50, win: 47.05 },
-  { id: 3, name: 'tiger', lose: 10000, win: 5.36 },
+  { id: 1, name: 'tiger', bettingAmount: 1000, win: 9001.32 },
+  { id: 2, name: 'tiger', bettingAmount: 6950.50, win: 47.05 },
+  { id: 3, name: 'tiger', bettingAmount: 10000, win: 5.36 },
 ];
 
 const bettingSecondListData = [
-  { id: 1, name: 'tiger', lose: 4000, win: 98.12 },
-  { id: 2, name: 'tiger', lose: 2700, win: 97.45 },
+  { id: 1, name: 'tiger', bettingAmount: 4000, win: 98.12 },
+  { id: 2, name: 'tiger', bettingAmount: 2700, win: 97.45 },
 ];
 
 export default function PlayerSidebar(props) {
@@ -189,7 +189,7 @@ export default function PlayerSidebar(props) {
                           fontFamily="'Montserrat', sans-serif"
                           sx={{ display: 'flex', alignItems: 'center', justifyContent: 'end' }}
                         >
-                          {data.lose}  <span className="text-yellow" style={{ fontSize: 13, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 
+                          {data.bettingAmount}  <span className="text-yellow" style={{ fontSize: 13, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 
                         </Typography>
                         <Typography
                           textAlign="right"
@@ -222,7 +222,7 @@ export default function PlayerSidebar(props) {
                           fontFamily="'Montserrat', sans-serif"
                           sx={{ display: 'flex', alignItems: 'center', justifyContent: 'end' }}
                         >
-                          {data.lose} <span className="text-yellow" style={{ fontSize: 13, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 
+                          {data.bettingAmount} <span className="text-yellow" style={{ fontSize: 13, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 
                         </Typography>
                         <Typography
                           textAlign="right"
@@ -255,7 +255,7 @@ export default function PlayerSidebar(props) {
                           fontFamily="'Montserrat', sans-serif"
                           sx={{ display: 'flex', alignItems: 'center', justifyContent: 'end' }}
                         >
-                          {data.lose} <span className="text-yellow" style={{ fontSize: 13, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 
+                          {data.bettingAmount} <span className="text-yellow" style={{ fontSize: 13, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 
                         </Typography>
                         <Typography
                           textAlign="right"
@@ -324,7 +324,7 @@ export default function PlayerSidebar(props) {
                           fontFamily="'Montserrat', sans-serif"
                           sx={{ display: 'flex', alignItems: 'center', justifyContent: 'end' }}
                         >
-                          {data.lose} <span className="text-yellow" style={{ fontSize: 13, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 
+                          {data.bettingAmount} <span className="text-yellow" style={{ fontSize: 13, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 
                         </Typography>
                         <Typography
                           textAlign="right"
@@ -357,7 +357,7 @@ export default function PlayerSidebar(props) {
                           fontFamily="'Montserrat', sans-serif"
                           sx={{ display: 'flex', alignItems: 'center', justifyContent: 'end' }}
                         >
-                          {data.lose}  <span className="text-yellow" style={{ fontSize: 13, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 
+                          {data.bettingAmount}  <span className="text-yellow" style={{ fontSize: 13, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 
                         </Typography>
                         <Typography
                           textAlign="right"
@@ -440,7 +440,7 @@ export default function PlayerSidebar(props) {
                           fontFamily="'Montserrat', sans-serif"
                           sx={{ display: 'flex', alignItems: 'center', justifyContent: 'end' }}
                         >
-                          {data.lose} <span className="text-yellow" style={{ fontSize: 13, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 
+                          {data.bettingAmount} <span className="text-yellow" style={{ fontSize: 13, fontFamily: "'Montserrat', sans-serif", paddingLeft: '3px', paddingRight: '4px' }} >x</span> 
                         </Typography>
                         <Typography
                           align="right"

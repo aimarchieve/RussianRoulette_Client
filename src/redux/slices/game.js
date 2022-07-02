@@ -63,7 +63,8 @@ export function addNewGame(wagered, payout, username, game, type, _id) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await api.post('/gameInfo/insertGameInfo', { wagered, payout, username, game, type });
+      // const response = await api.post('/gameInfo/insertGameInfo', { wagered, payout, username, game, type });
+      const response = await api.post('/gameInfo/generatorRandomNumber', { wagered, payout, username, game, type });
       dispatch(slice.actions.getRandomNumber(response.data.randomNumber));
       dispatch(slice.actions.getResult(response.data.result));
       const res = await api.get(`/userInfo/getUserInfoById/${_id}`);
