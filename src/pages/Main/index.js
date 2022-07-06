@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button as MuiButton, ButtonGroup, Grid, Stack, Typography, styled } from '@mui/material';
-import ReplayIcon from '@mui/icons-material/Replay';
-import DiamondIcon from '@mui/icons-material/Diamond';
 import LeftSlider from './LeftSlider';
 import RightSlider from './RightSlider';
 import BetListModal from '../../components/BetListModal';
@@ -21,6 +19,7 @@ import GroupAnimation from './GroupAnimation';
 import './style.css';
 import { addNewGame } from '../../redux/slices/game';
 import { getGameInfo } from '../../redux/slices/game';
+import { generateMultiplier } from '../../redux/slices/generateMultiplier';
 import { useDispatch, useSelector } from '../../redux/store';
 import Marquee from "react-easy-marquee";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -69,7 +68,9 @@ export default function Main(props) {
   const { currentUser } = useAuth();
   const [speed, setSpeed] = useState(0);
   const dispatch = useDispatch();
-  const { multiplier, multipliers, gameInfo } = useSelector((state) => state.game);
+  const { gameInfo } = useSelector((state) => state.game);
+  const { nonce } = useSelector((state) => state.generateMultiplier);
+  const { multiplier, multipliers } = useSelector((state) => state.generateMultiplier);
   const [autoplay, setAutoplay] = useState(false);
   const [advancedAutoplay, setAdvancedAutoplay] = useState(false);
   const { openBetListModal } = useBetList();
@@ -130,7 +131,8 @@ export default function Main(props) {
     setSpeed(3500);
     closehandleAutoplay();
     if (currentUser) {
-      dispatch(addNewGame(wagered, payout, currentUser.username, props.gameMode, props.gameType, currentUser._id));
+      // dispatch(addNewGame(wagered, payout, currentUser.username, props.gameMode, props.gameType, currentUser._id));
+      dispatch(generateMultiplier(wagered, payout, currentUser.username, props.gameMode, props.gameType, currentUser._id, nonce));
     }
     setTimeout(() => dispatch(getGameInfo()), 5800);
   }
@@ -191,7 +193,7 @@ export default function Main(props) {
       setSpeed(3500)
       setStartRandomGenerate(true)
       if (currentUser) {
-        dispatch(addNewGame(wagered, payout, currentUser.username, props.gameMode, props.gameType, currentUser._id));
+        dispatch(generateMultiplier(wagered, payout, currentUser.username, props.gameMode, props.gameType, currentUser._id, nonce));
       }
       return () => clearInterval(interval)
     } else if (props.gameMode === 'solo' && !soloPlay) {
@@ -1043,7 +1045,7 @@ export default function Main(props) {
                         Max bet
                       </MainButton>
 
-                      <MainButton
+                      {props.gameMode === 'solo' ? <MainButton
                         sx={{
                           fontSize: 36,
                           fontWeight: 800,
@@ -1062,7 +1064,26 @@ export default function Main(props) {
                             :
                             'play'
                         }
-                      </MainButton>
+                      </MainButton> :
+                        <MainButton
+                          sx={{
+                            fontSize: 36,
+                            fontWeight: 800,
+                            fontFamily: "Montserrat",
+                            textTransform: 'uppercase',
+                            color: 'black',
+                            width: '50%',
+                            marginLeft: '3px !important',
+                            marginRight: '4px !important',
+                          }}
+                        >
+                          {
+                            (autoplay || advancedAutoplay) ?
+                              'Start'
+                              :
+                              'play'
+                          }
+                        </MainButton>}
 
                       <MainButton
                         sx={{

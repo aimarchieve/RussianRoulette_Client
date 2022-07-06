@@ -5,6 +5,7 @@ import userReducer from './slices/user';
 import stakingReducer from './slices/staking';
 import tipReducer from './slices/tip';
 import getAddressReducer from './slices/getAddress';
+import generateMultiplierReducer from './slices/generateMultiplier';
 
 // ----------------------------------------------------------------------
 
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     staking: stakingReducer,
     tip: tipReducer,
     getAddress: getAddressReducer,
+    generateMultiplier: generateMultiplierReducer,
 });
 
 export { rootReducer };
