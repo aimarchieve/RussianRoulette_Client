@@ -12,6 +12,7 @@ import { BetInfoProvider } from './contexts/BetInfoContext';
 import { UserStatsProvider } from './contexts/UserStatsContext';
 import { store } from "./redux/store"
 import { AffiliateProvider } from './contexts/AffiliateContext';
+import { FairnessProvider } from './contexts/FairnessContext';
 
 export default function App() {
   const theme = createTheme({
@@ -29,13 +30,15 @@ export default function App() {
               <BetListProvider>
                 <BetInfoProvider>
                   <AffiliateProvider>
-                    <UserStatsProvider>
-                      <ReduxProvider store={store}>
-                        <Router>
-                          <Routes />
-                        </Router>
-                      </ReduxProvider>
-                    </UserStatsProvider>
+                    <FairnessProvider>
+                      <UserStatsProvider>
+                        <ReduxProvider store={store}>
+                          <Router>
+                            <Routes />
+                          </Router>
+                        </ReduxProvider>
+                      </UserStatsProvider>
+                    </FairnessProvider>
                   </AffiliateProvider>
                 </BetInfoProvider>
               </BetListProvider>

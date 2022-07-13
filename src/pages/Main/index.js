@@ -328,7 +328,6 @@ export default function Main(props) {
                         backgroundColor="#f8bf60"
                         borderBottom="2px solid black"
                         sx={{ position: 'absolute', zIndex: 1000, bottom: 100, width: '100%' }}
-
                       >
                         <Box
                           sx={{ display: 'flex', direction: 'row', justifyContent: 'space-between', alignItems: 'center', position: 'relative' }}

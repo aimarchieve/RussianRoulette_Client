@@ -25,12 +25,13 @@ import { useTheme } from '@mui/material/styles';
 import { TabContext, TabPanel } from '@mui/lab';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import DiamondIcon from '@mui/icons-material/Diamond';
 import { Icon } from '@iconify/react';
 import useUserStats from '../../hooks/useUserStats';
 import StarIcon from '@mui/icons-material/Star';
 import BlockIcon from '@mui/icons-material/Block';
 import { ChartLine } from '../charts';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGem } from "@fortawesome/free-solid-svg-icons";
 
 /* ---------------------------------------------------------------------------------------- */
 
@@ -158,7 +159,7 @@ export default function UserStatsModal() {
                                 <StarIcon />175
                             </Typography>
 
-                            <Grid container columns={10} sx={{ height: '15px', flexGrow: 1, pr: 2, width: '80%' }}>
+                            <Grid container columns={10} sx={{ height: '15px', flexGrow: 1, pr: 2, width: '80%' }} >
                                 {
                                     [0, 1, 2, 3, 4, 5, 6, 7].map(itemIndex => (
                                         <Grid key={itemIndex} item md={1} sx={{ px: 1 }}>
@@ -244,11 +245,11 @@ export default function UserStatsModal() {
                                         >
                                             <TableCell>{dataItem.games}</TableCell>
                                             <TableCell>{dataItem.bets}</TableCell>
-                                            <TableCell><DiamondIcon sx={{ fontSize: 14, color: '#f8bf60' }} />{dataItem.wagered}</TableCell>
-                                            <TableCell sx={{ color: '#f8bf60' }} ><DiamondIcon sx={{ fontSize: 14, color: '#f8bf60' }} />{dataItem.profit}</TableCell>
-                                            <TableCell sx={{ color: '#f8bf60' }} ><DiamondIcon sx={{ fontSize: 14, color: '#f8bf60' }} />{dataItem.profitath}</TableCell>
-                                            <TableCell sx={{ color: '#f8bf60' }} ><DiamondIcon sx={{ fontSize: 14, color: '#f8bf60' }} />{dataItem.balance}</TableCell>
-                                            <TableCell sx={{ color: '#f8bf60' }} ><DiamondIcon sx={{ fontSize: 14, color: '#f8bf60' }} />{dataItem.balanceath}</TableCell>
+                                            <TableCell><FontAwesomeIcon icon={faGem} className="text-yellow" style={{ fontSize: 10, paddingRight: '2px' }} />{dataItem.wagered}</TableCell>
+                                            <TableCell sx={{ color: '#f8bf60' }} ><FontAwesomeIcon icon={faGem} className="text-yellow" style={{ fontSize: 10, paddingRight: '2px' }} />{dataItem.profit}</TableCell>
+                                            <TableCell sx={{ color: '#f8bf60' }} ><FontAwesomeIcon icon={faGem} className="text-yellow" style={{ fontSize: 10, paddingRight: '2px' }} />{dataItem.profitath}</TableCell>
+                                            <TableCell sx={{ color: '#f8bf60' }} ><FontAwesomeIcon icon={faGem} className="text-yellow" style={{ fontSize: 10, paddingRight: '2px' }} />{dataItem.balance}</TableCell>
+                                            <TableCell sx={{ color: '#f8bf60' }} ><FontAwesomeIcon icon={faGem} className="text-yellow" style={{ fontSize: 10, paddingRight: '2px' }} />{dataItem.balanceath}</TableCell>
                                         </TableRow>
                                     ))
                                 }

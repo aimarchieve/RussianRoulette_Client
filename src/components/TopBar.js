@@ -21,8 +21,10 @@ import WalletModal from './WalletModal';
 import useWallet from '../hooks/useWallet';
 import useAccount from '../hooks/useAccount';
 import useAffiliate from '../hooks/useAffiliate';
+import useFairness from '../hooks/useFairness';
 import AffiliateModal from './AffiliateModal';
 import AccountModal from './AccountModal';
+import FairnessModal from './FairnessModal';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { useDispatch, useSelector } from '../redux/store';
@@ -102,6 +104,7 @@ export default function TopBar(props) {
   const { openWalletModal } = useWallet();
   const { openAccountModal } = useAccount();
   const { openAffiliateModal } = useAffiliate();
+  const { openFairnessModal } = useFairness();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const dispatch = useDispatch();
   const { balance } = useSelector((state) => state.game);
@@ -135,6 +138,12 @@ export default function TopBar(props) {
     handleClose();
     handleCloseNavMenu();
   };
+
+  const handleFairnessModal = () => {
+    openFairnessModal();
+    handleClose();
+    handleCloseNavMenu();
+  }
 
   const handleLogout = () => {
     handleCloseNavMenu();
@@ -325,6 +334,7 @@ export default function TopBar(props) {
                   >
                     <MenuItem onClick={handleAccountModal}>Account</MenuItem>
                     <MenuItem onClick={handleAffiliateModal}>Affiliate</MenuItem>
+                    <MenuItem onClick={handleFairnessModal} > Fairness </MenuItem>
                   </Menu>
                 </Box>
                 :
@@ -349,6 +359,7 @@ export default function TopBar(props) {
       <WalletModal />
       <AccountModal />
       <AffiliateModal />
+      <FairnessModal />
     </AppBar >
   );
 };

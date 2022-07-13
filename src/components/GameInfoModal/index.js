@@ -46,27 +46,27 @@ const tableData = [
         win: '375,000',
         link: 'BET #75,405',
     },
-    {
-        player: 'troyr3750',
-        bet: '50,000',
-        payout: '7.50',
-        win: '375,000',
-        link: 'BET #75,405',
-    },
-    {
-        player: 'troyr3750',
-        bet: '50,000',
-        payout: '7.50',
-        win: '375,000',
-        link: 'BET #75,405',
-    },
-    {
-        player: 'troyr3750',
-        bet: '50,000',
-        payout: '7.50',
-        win: '375,000',
-        link: 'BET #75,405',
-    }
+    // {
+    //     player: 'troyr3750',
+    //     bet: '50,000',
+    //     payout: '7.50',
+    //     win: '375,000',
+    //     link: 'BET #75,405',
+    // },
+    // {
+    //     player: 'troyr3750',
+    //     bet: '50,000',
+    //     payout: '7.50',
+    //     win: '375,000',
+    //     link: 'BET #75,405',
+    // },
+    // {
+    //     player: 'troyr3750',
+    //     bet: '50,000',
+    //     payout: '7.50',
+    //     win: '375,000',
+    //     link: 'BET #75,405',
+    // }
 ];
 
 const TableHead = styled(MuiTableHead)(({ theme }) => ({

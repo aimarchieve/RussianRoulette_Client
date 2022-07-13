@@ -8,19 +8,18 @@ import {
   styled,
   IconButton,
   Stack,
-  Tab as MuiTab,
   Typography
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
-import useAffiliate from '../../hooks/useAffiliate';
+import useFairness from '../../hooks/useFairness';
 import TabsListUnstyled from '@mui/base/TabsListUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
 import { grey } from '@mui/material/colors';
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import TabsUnstyled from '@mui/base/TabsUnstyled';
-import CampainsTabPanel from './CampainsTabPanel';
-import ReferralsTabPanel from './ReferralsTabPanel';
+import SeedsTabPanel from './SeedsTabPanel';
+import VerifyTabPanel from './VerifyTabPanel';
 
 const Tab = styled(TabUnstyled)`
   font-family: IBM Plex Sans, sans-serif;
@@ -65,7 +64,8 @@ const TabsList = styled(TabsListUnstyled)`
 
 const Dialog = styled(MuiDialog)(({ theme }) => ({
   '& .MuiPaper-root': {
-    background: '#191e24'
+    // background: '#191e24'
+    background: '#2c3137'
   }
 }));
 
@@ -95,47 +95,48 @@ const DialogTitle = (props) => {
 
 /* ---------------------------------------------------------------------------------------- */
 
-export default function AffiliateModal() {
-  const { modalIsOpened, closeAffiliateModal } = useAffiliate();
+export default function FairnessModal() {
+  const { modalIsOpened, closeFairnessModal } = useFairness();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-  const [ campains, setCampains ] = useState(true);
-  const [ referrals, setReferrals ] = useState(false);
+  const [ seeds, setSeeds ] = useState(true);
+  const [ verify, setVerify ] = useState(false);
 
-  const openCampainsPanel = () => {
-    setCampains(true);
-    setReferrals(false);
+  const openSeedsPanel = () => {
+    setSeeds(true);
+    setVerify(false);
   }
 
-  const openReferralsPanel = () => {
-    setReferrals(true);
-    setCampains(false);
+  const openVerifyPanel = () => {
+    setVerify(true);
+    setSeeds(false);
   }
-  
-  const handleCloseAffiliateModal = () => {
-    closeAffiliateModal()
-    setCampains(true)
-    setReferrals(false)
+
+  const handleCloseFairnessModal = () => {
+    closeFairnessModal();
+    setSeeds(true);
+    setVerify(false);
   }
 
   return (
     <Dialog
       fullScreen={fullScreen}
       open={modalIsOpened}
-      onClose={handleCloseAffiliateModal}
+      onClose={handleCloseFairnessModal}
       aria-labelledby="responsive-dialog-title"
       fullWidth={true}
-      maxWidth="md"
+      maxWidth="sm"
     >
-      <DialogTitle id="responsive-dialog-title" onClose={handleCloseAffiliateModal}>
+      <DialogTitle id="responsive-dialog-title" onClose={handleCloseFairnessModal}>
         <Stack direction="row">
           <Typography
             ml={1}
             fontSize={16}
             fontWeight={700}
             textTransform="uppercase"
+            fontFamily="Montserrat"
           >
-            affiliate
+            fairness
           </Typography>
         </Stack>
       </DialogTitle>
@@ -144,17 +145,17 @@ export default function AffiliateModal() {
           <Box sx={{ marginBottom: '30px' }}>
             <TabsUnstyled defaultValue={0}>
               <TabsList>
-                <Tab onClick={openCampainsPanel} sx={{ fontFamily: 'Montserrat', textTransform: 'uppercase' }}>campains</Tab>
-                <Tab onClick={openReferralsPanel} sx={{ fontFamily: 'Montserrat', textTransform: 'uppercase' }}>referrals</Tab>
+                <Tab onClick={openSeedsPanel} sx={{ fontFamily: 'Montserrat', textTransform: 'uppercase' }}>seeds</Tab>
+                <Tab onClick={openVerifyPanel} sx={{ fontFamily: 'Montserrat', textTransform: 'uppercase' }}>verify</Tab>
               </TabsList>
             </TabsUnstyled>
           </Box>
           {
-            campains ?
-              <CampainsTabPanel />
+            seeds ?
+              <SeedsTabPanel />
               :
-              referrals ?
-                <ReferralsTabPanel />
+              verify ?
+                <VerifyTabPanel />
                 :
                 ''
           }
