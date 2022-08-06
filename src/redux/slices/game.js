@@ -11,7 +11,7 @@ const initialState = {
   multipliers: [],
   multiplier: null,
   balance: 0,
-  gameInfo: [],
+  gameInfo: [''],
 };
 
 const slice = createSlice({

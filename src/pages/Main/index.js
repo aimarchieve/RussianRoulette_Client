@@ -858,7 +858,6 @@ export default function Main(props) {
                       ''
                   }
 
-
                   {
                     autoplay ?
                       <Stack
