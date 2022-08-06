@@ -11,7 +11,7 @@ const initialState = {
   multipliers: [],
   multiplier: null,
   balance: 0,
-  gameInfo: [''],
+  gameInfo: [{"_id":"62a8386fc9d0f53cfc658141","date":"","game":"group","game_id":1,"payout":27.34,"players":102,"result":75,"type":"base","username":"master","wagered":300}],
 };
 
 const slice = createSlice({
